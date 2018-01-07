@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BooksAndMore.Identity", "BooksAndMore.Identity", "{B3B7BB8F-1D44-4B6B-B2D8-B9058C0167DF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{DE7AEA68-A578-4071-94D4-FE5865AF3466}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BooksAndMore.Catalogue", "BooksAndMore.Catalogue", "{5D947D18-4105-4BED-B19E-D8614B69C397}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F9F72FAF-C8F4-4817-A02C-7A4146A0D8C6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BooksAndMore.Sales", "BooksAndMore.Sales", "{C3504CC6-482B-4D84-92B6-18D4F4EC6686}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{B234C048-D991-4C50-9653-059A1823D5F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{80B86B25-C986-4822-974A-132B3C8D0C39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +24,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B398FD62-6C32-4075-B4AB-232869F93A9F}
+		SolutionGuid = {CD65215D-259E-47E8-B8D7-5D890351554D}
 	EndGlobalSection
 EndGlobal
