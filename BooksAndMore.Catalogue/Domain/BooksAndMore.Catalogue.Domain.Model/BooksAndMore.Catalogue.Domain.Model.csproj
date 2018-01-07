@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BooksAndMore.Catalogue.Domain.Common\BooksAndMore.Catalogue.Domain.Common.csproj" />
+  </ItemGroup>
+
 </Project>
