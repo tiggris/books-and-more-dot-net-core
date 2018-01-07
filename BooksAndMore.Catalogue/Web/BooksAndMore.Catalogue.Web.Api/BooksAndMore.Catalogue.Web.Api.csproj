@@ -16,4 +16,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\BooksAndMore.Catalogue.Domain.Model\BooksAndMore.Catalogue.Domain.Model.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\BooksAndMore.Catalogue.Infrastructure.Data\BooksAndMore.Catalogue.Infrastructure.Data.csproj" />
+  </ItemGroup>
+
 </Project>
