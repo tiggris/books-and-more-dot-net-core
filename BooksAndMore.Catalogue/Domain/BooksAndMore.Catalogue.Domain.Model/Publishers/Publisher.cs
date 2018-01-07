@@ -6,6 +6,11 @@ namespace BooksAndMore.Catalogue.Domain.Model.Publishers
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
-        public Address Address { get; private set; }
+        public string AddressStreet { get; private set; }
+        public string AddressBuilding { get; private set; }
+        public string AddressApartment { get; private set; }
+        public string AddressCity { get; private set; }
+        public string AddressZipCode { get; private set; }
+        public string AddressCountry { get; private set; }
     }
 }

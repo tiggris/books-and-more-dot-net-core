@@ -16,5 +16,12 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
         {
 
         }
-    }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<BookAuthor>().HasKey(bookAuthor => new { bookAuthor.BookId, bookAuthor.AuthorId });
+        }
+    }    
 }
