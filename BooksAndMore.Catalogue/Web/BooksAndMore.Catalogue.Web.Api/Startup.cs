@@ -9,6 +9,9 @@ namespace BooksAndMore.Catalogue.Web.Api
 {
     public class Startup
     {
+        private const string _connectionStringName = "BooksCatalogueDb";
+        private const string _migrationsAssemblyName = "BooksAndMore.Catalogue.Infrastructure.Data.Migrations";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -20,7 +23,9 @@ namespace BooksAndMore.Catalogue.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BooksCatalogueContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("BooksCatalogueDb")));
+                options.UseSqlServer(
+                    Configuration.GetConnectionString(_connectionStringName),
+                    sqlServerOptions => sqlServerOptions.MigrationsAssembly(_migrationsAssemblyName)));
 
             services.AddMvc();
         }
