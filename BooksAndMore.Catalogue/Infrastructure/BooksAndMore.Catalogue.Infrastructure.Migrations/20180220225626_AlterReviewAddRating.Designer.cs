@@ -11,9 +11,10 @@ using System;
 namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(BooksCatalogueContext))]
-    partial class BooksCatalogueContextModelSnapshot : ModelSnapshot
+    [Migration("20180220225626_AlterReviewAddRating")]
+    partial class AlterReviewAddRating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,8 +78,6 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations
                     b.Property<int?>("BookId");
 
                     b.Property<int>("Rating");
-
-                    b.Property<DateTime>("CreateDate");
 
                     b.Property<string>("ReviewText");
 
