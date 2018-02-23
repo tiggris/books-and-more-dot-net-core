@@ -22,7 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Application\BooksAndMore.Catalogue.Application.Commands\BooksAndMore.Catalogue.Application.Commands.csproj" />
+    <ProjectReference Include="..\..\Application\BooksAndMore.Catalogue.Application.Queries\BooksAndMore.Catalogue.Application.Queries.csproj" />
+    <ProjectReference Include="..\..\Domain\BooksAndMore.Catalogue.Domain.Common\BooksAndMore.Catalogue.Domain.Common.csproj" />
     <ProjectReference Include="..\..\Domain\BooksAndMore.Catalogue.Domain.Model\BooksAndMore.Catalogue.Domain.Model.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\BooksAndMore.Catalogue.Infrastructure.Common\BooksAndMore.Catalogue.Infrastructure.Common.csproj" />
     <ProjectReference Include="..\..\Infrastructure\BooksAndMore.Catalogue.Infrastructure.Data\BooksAndMore.Catalogue.Infrastructure.Data.csproj" />
     <ProjectReference Include="..\..\Infrastructure\BooksAndMore.Catalogue.Infrastructure.Migrations\BooksAndMore.Catalogue.Infrastructure.Migrations.csproj" />
   </ItemGroup>

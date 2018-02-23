@@ -1,4 +1,5 @@
 ﻿using BooksAndMore.Catalogue.Infrastructure.Data;
+using BooksAndMore.Catalogue.Web.Api.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,12 @@ namespace BooksAndMore.Catalogue.Web.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    serviceScope.ServiceProvider.GetService<BooksCatalogueContext>().Database.Migrate();
+                    serviceScope.ServiceProvider.GetService<BooksCatalogueContext>().EnsureSeedData();
+                }
             }
 
             app.UseMvc();
