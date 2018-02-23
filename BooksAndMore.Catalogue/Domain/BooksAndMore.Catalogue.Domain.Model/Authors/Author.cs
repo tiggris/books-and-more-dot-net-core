@@ -11,5 +11,17 @@ namespace BooksAndMore.Catalogue.Domain.Model.Authors
         public string LastName { get; private set; }
         public string Bio { get; private set; }
         public ICollection<BookAuthor> BookAuthors { get; private set; }
+
+        private Author()
+        {
+            BookAuthors = new HashSet<BookAuthor>();
+        }
+
+        public Author(string firstName, string lastName, string bio = null) : this()
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Bio = bio;
+        }
     }
 }
