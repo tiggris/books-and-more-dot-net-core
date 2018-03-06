@@ -12,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(BooksCatalogueContext))]
-    partial class BooksCatalogueContextModelSnapshot : ModelSnapshot
+    [Migration("20180306224619_PublisherAddressMapping")]
+    partial class PublisherAddressMapping
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -21,8 +21,8 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Publisher>().Ignore(publisher => publisher.Address);
+            modelBuilder.Entity<Publisher>().OwnsOne(publisher => publisher.Address);
             modelBuilder.Entity<BookAuthor>().HasKey(bookAuthor => new { bookAuthor.BookId, bookAuthor.AuthorId });
         }
-    }    
+    }
 }
