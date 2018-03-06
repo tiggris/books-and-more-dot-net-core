@@ -1,8 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RuntimeFrameworkVersion>2.0.4</RuntimeFrameworkVersion>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RuntimeFrameworkVersion>2.1.0-preview1-26216-03</RuntimeFrameworkVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\BooksAndMore.Catalogue.Domain.Common\BooksAndMore.Catalogue.Domain.Common.csproj" />
+    <ProjectReference Include="..\..\Domain\BooksAndMore.Catalogue.Domain.Model\BooksAndMore.Catalogue.Domain.Model.csproj" />
+  </ItemGroup>
 
 </Project>
