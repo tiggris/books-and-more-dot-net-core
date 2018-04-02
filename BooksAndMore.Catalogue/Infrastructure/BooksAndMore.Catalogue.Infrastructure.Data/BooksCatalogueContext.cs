@@ -25,13 +25,17 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new BookEntityConfiguration());
             modelBuilder.ApplyConfiguration(new AuthorEntityConfiguration());
             modelBuilder.ApplyConfiguration(new BookAuthorEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new PublisherEntityConfiguration());
 
-            modelBuilder.Entity<Publisher>(builder =>
-            {
-                builder.OwnsOne(publisher => publisher.Address);
-            });
+            //modelBuilder.Entity<Publisher>(builder =>
+            //{
+            //    builder.Property(publisher => publisher.Name)
+            //    .IsRequired()
+            //    .HasMaxLength(100);
+            //    builder.OwnsOne(publisher => publisher.Address);
+            //});
 
             base.OnModelCreating(modelBuilder);
-        }        
+        }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace BooksAndMore.Catalogue.Domain.Model.Publishers
+﻿using BooksAndMore.Catalogue.Domain.Common;
+
+namespace BooksAndMore.Catalogue.Domain.Model.Publishers
 {
-    public class Address
+    public class Address: ValueObject
     {
         public string Street { get; private set; }
         public string Building { get; private set; }
@@ -9,7 +11,7 @@
         public string ZipCode { get; private set; }
         public string Country { get; private set; }
 
-        public Address(string street, string building, string apartment, string city, string zipCode, string country)
+        internal Address(string street, string building, string apartment, string city, string zipCode, string country)
         {
             Street = street;
             Building = building;
