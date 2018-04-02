@@ -19,16 +19,17 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {            
+        {
+            modelBuilder.HasDefaultSchema("catalogue");
+
             modelBuilder.ApplyConfiguration(new BookEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new AuthorEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new BookAuthorEntityConfiguration());
 
             modelBuilder.Entity<Publisher>(builder =>
             {
                 builder.OwnsOne(publisher => publisher.Address);
             });
-
-            modelBuilder.Entity<BookAuthor>()
-                .HasKey(bookAuthor => new { bookAuthor.BookId, bookAuthor.AuthorId });
 
             base.OnModelCreating(modelBuilder);
         }        

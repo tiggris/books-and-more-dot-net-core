@@ -1,7 +1,7 @@
 ﻿using BooksAndMore.Catalogue.Domain.Model.Books;
+using BooksAndMore.Catalogue.Infrastructure.Data.Mapping.ValueGenerators;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.Converters;
 
 namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
 {

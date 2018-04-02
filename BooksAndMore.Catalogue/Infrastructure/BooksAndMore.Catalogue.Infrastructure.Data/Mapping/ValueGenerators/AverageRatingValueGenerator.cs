@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 using System.Linq;
 
-namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
+namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping.ValueGenerators
 {
     public class AverageRatingValueGenerator : ValueGenerator<double>
     {

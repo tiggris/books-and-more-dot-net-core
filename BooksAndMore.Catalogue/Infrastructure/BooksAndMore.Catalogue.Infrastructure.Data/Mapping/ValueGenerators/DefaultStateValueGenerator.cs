@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 
-namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
+namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping.ValueGenerators
 {
     public class DefaultStateValueGenerator : ValueGenerator<string>
     {
