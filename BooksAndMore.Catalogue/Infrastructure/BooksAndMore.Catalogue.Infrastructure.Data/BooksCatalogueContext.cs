@@ -1,6 +1,7 @@
 ﻿using BooksAndMore.Catalogue.Domain.Model.Authors;
 using BooksAndMore.Catalogue.Domain.Model.Books;
 using BooksAndMore.Catalogue.Domain.Model.Publishers;
+using BooksAndMore.Catalogue.Infrastructure.Data.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace BooksAndMore.Catalogue.Infrastructure.Data
@@ -18,11 +19,18 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+        {            
+            modelBuilder.ApplyConfiguration(new BookEntityConfiguration());
 
-            modelBuilder.Entity<Publisher>().OwnsOne(publisher => publisher.Address);
-            modelBuilder.Entity<BookAuthor>().HasKey(bookAuthor => new { bookAuthor.BookId, bookAuthor.AuthorId });
-        }
+            modelBuilder.Entity<Publisher>(builder =>
+            {
+                builder.OwnsOne(publisher => publisher.Address);
+            });
+
+            modelBuilder.Entity<BookAuthor>()
+                .HasKey(bookAuthor => new { bookAuthor.BookId, bookAuthor.AuthorId });
+
+            base.OnModelCreating(modelBuilder);
+        }        
     }
 }

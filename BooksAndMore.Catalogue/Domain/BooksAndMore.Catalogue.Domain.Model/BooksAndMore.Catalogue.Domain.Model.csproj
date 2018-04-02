@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.ComponentModel" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BooksAndMore.Catalogue.Domain.Common\BooksAndMore.Catalogue.Domain.Common.csproj" />
   </ItemGroup>
 
