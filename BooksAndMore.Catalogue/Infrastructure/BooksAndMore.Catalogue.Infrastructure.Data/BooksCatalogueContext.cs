@@ -26,6 +26,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new AuthorEntityConfiguration());
             modelBuilder.ApplyConfiguration(new BookAuthorEntityConfiguration());
             modelBuilder.ApplyConfiguration(new PublisherEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ReviewEntityConfiguration());
 
             //modelBuilder.Entity<Publisher>(builder =>
             //{
