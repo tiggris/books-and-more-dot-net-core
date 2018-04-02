@@ -8,6 +8,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<BookAuthor> builder)
         {
+            builder.ToTable("BookAuthors", "catalogue");
             builder.HasKey(bookAuthor => new { bookAuthor.BookId, bookAuthor.AuthorId });
         }
     }

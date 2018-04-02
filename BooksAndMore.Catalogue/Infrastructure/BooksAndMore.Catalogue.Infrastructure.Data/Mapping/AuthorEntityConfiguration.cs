@@ -8,6 +8,10 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Author> builder)
         {
+            builder.HasDiscriminator(author => author.AuthorType)
+                .HasValue<Author>(AuthorType.Author)
+                .HasValue<Illustrator>(AuthorType.Illustrator);
+
             builder.Property(author => author.FirstName)
                 .IsRequired()
                 .HasMaxLength(30);

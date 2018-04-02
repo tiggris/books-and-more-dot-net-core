@@ -11,6 +11,7 @@ namespace BooksAndMore.Catalogue.Domain.Model.Authors
         public string LastName { get; private set; }
         public string FullName { get; private set; }
         public string Bio { get; private set; }
+        public AuthorType AuthorType { get; private set; }
         public ICollection<BookAuthor> BookAuthors { get; private set; }
 
         private Author()

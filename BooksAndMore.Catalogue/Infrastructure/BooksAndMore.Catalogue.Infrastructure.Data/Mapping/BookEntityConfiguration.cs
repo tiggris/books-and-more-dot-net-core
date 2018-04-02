@@ -20,6 +20,10 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             builder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
             builder.UsePropertyAccessMode(PropertyAccessMode.Property);
 
+            builder.HasDiscriminator(book => book.IsIllustrated)
+                .HasValue<Book>(false)
+                .HasValue<IllustratedBook>(true);
+
             builder.Property(book => book.Title)
                 .IsRequired()
                 .HasMaxLength(100);

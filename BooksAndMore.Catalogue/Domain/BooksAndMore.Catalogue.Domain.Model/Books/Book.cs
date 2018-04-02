@@ -16,6 +16,7 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books
         public string Isbn { get; private set; }
         public string Description { get; private set; }
         public decimal AverageRating { get; private set; }
+        public bool IsIllustrated { get; private set; }
         public State State { get; private set; }
         public Publisher Publisher { get; private set; }
         public ICollection<BookAuthor> BookAuthors { get; private set; }

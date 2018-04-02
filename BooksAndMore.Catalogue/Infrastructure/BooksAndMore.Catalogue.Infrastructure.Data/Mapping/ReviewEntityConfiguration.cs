@@ -8,6 +8,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Review> builder)
         {
+            builder.ToTable("Reviews", "catalogue");
             builder.Property(review => review.Rating)
                 .IsRequired();
             builder.Property(review => review.ReviewerName)
