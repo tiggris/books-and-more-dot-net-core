@@ -24,24 +24,42 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
                 .HasValue<Book>(false)
                 .HasValue<IllustratedBook>(true);
 
-            builder.Property(book => book.Title)
-                .IsRequired()
-                .HasMaxLength(100);
-            builder.Property(book => book.Isbn)
-                .IsRequired()
-                .HasMaxLength(13)
-                .HasColumnName("ISBN")
-                .UsePropertyAccessMode(PropertyAccessMode.Field);
-            builder.Property(book => book.State)
-                .HasConversion<string>()
-                .HasColumnType("nvarchar(20)")
-                .HasDefaultValueSql($"N'Active'");
+            MapTitleProperty(builder);
+            MapIsbnProperty(builder);
+            MapStateProperty(builder);
+
             builder.Property(book => book.AverageRating)
                 .IsRequired()
                 .HasColumnType("decimal(3,2)")
                 .HasDefaultValue(0)
                 .HasValueGenerator<AverageRatingValueGenerator>()
-                .ValueGeneratedOnUpdate();   
+                .ValueGeneratedOnUpdate();
         }
+
+        public static void MapTitleProperty(EntityTypeBuilder builder)
+        {
+            builder.Property("Title")
+                .HasColumnName("Title")
+                .IsRequired()
+                .HasMaxLength(100);
+        }
+
+        public static void MapIsbnProperty(EntityTypeBuilder builder)
+        {
+            builder.Property("Isbn")
+               .IsRequired()
+               .HasMaxLength(13)
+               .HasColumnName("ISBN")
+               .UsePropertyAccessMode(PropertyAccessMode.Field);
+        }
+
+        public static void MapStateProperty(EntityTypeBuilder builder)
+        {
+            builder.Property("State")
+                .HasColumnName("State")
+                .HasConversion<string>()
+                .HasColumnType("nvarchar(20)")
+                .HasDefaultValueSql($"N'Active'");
+        }        
     }
 }

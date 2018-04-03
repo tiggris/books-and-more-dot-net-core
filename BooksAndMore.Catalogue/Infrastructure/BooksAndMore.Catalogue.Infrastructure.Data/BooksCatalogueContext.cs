@@ -23,6 +23,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
             modelBuilder.HasDefaultSchema("catalogue");
 
             modelBuilder.ApplyConfiguration(new BookEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new BookInfoEntityConfiguration());
             modelBuilder.ApplyConfiguration(new IllustratedBookEntityConfiguration());
             modelBuilder.ApplyConfiguration(new AuthorEntityConfiguration());
             modelBuilder.ApplyConfiguration(new IllustratorEntityConfiguration());
