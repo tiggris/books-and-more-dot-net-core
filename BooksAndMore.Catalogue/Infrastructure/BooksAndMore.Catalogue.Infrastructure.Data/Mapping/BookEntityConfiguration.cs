@@ -34,7 +34,8 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
                 .UsePropertyAccessMode(PropertyAccessMode.Field);
             builder.Property(book => book.State)
                 .HasConversion<string>()
-                .HasDefaultValueSql($"'{State.Active.ToString()}'");
+                .HasColumnType("nvarchar(20)")
+                .HasDefaultValueSql($"N'Active'");
             builder.Property(book => book.AverageRating)
                 .IsRequired()
                 .HasColumnType("decimal(3,2)")
