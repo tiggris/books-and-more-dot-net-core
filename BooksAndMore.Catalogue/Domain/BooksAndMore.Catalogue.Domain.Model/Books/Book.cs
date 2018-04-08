@@ -4,6 +4,7 @@ using BooksAndMore.Catalogue.Domain.Model.Books.Reviews;
 using BooksAndMore.Catalogue.Domain.Model.Publishers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 
@@ -19,14 +20,15 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books
         public bool IsIllustrated { get; private set; }
         public State State { get; private set; }
         public Publisher Publisher { get; private set; }
-        public ICollection<BookAuthor> BookAuthors { get; private set; }
-        public ICollection<Review> Reviews { get; private set; }
+        public ObservableCollection<BookAuthor> BookAuthors { get; private set; }
+        public ObservableCollection<Review> Reviews { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected Book()
         {
-            Reviews = new HashSet<Review>();
+            Reviews = new ObservableCollection<Review>();
+            BookAuthors = new ObservableCollection<BookAuthor>();
         }        
 
         public Book(string title, string isbn, string description, Publisher publisher, IList<Author> authors): this()
@@ -55,9 +57,10 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(State)));
         }
 
-        protected IList<BookAuthor> GetBookAuthors(IList<Author> authors)
+        protected ObservableCollection<BookAuthor> GetBookAuthors(IList<Author> authors)
         {
-            return authors?.Select(author => new BookAuthor(this, author)).ToList();
+            var bookAuthors = authors?.Select(author => new BookAuthor(this, author)).ToList();
+            return new ObservableCollection<BookAuthor>(bookAuthors);
         }        
     }
 }
