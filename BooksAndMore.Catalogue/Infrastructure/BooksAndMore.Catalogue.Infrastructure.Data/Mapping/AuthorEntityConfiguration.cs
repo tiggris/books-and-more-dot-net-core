@@ -11,7 +11,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             builder.HasDiscriminator(author => author.AuthorType)
                 .HasValue<Author>(AuthorType.Author)
                 .HasValue<Illustrator>(AuthorType.Illustrator);
-
+            
             builder.Property(author => author.FirstName)
                 .IsRequired()
                 .HasMaxLength(30);
@@ -20,6 +20,12 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
                 .HasMaxLength(50);
             builder.Property(author => author.FullName)
                 .HasComputedColumnSql("[FirstName] + ' ' + [LastName]");
-        }
+
+            //builder.SeedData(
+            //    new { Id = 1, FirstName = "Adam", LastName = "Mickiewicz", AuthorType = AuthorType.Author },
+            //    new { Id = 2, FirstName = "Juliusz", LastName = "Słowacki", AuthorType = AuthorType.Author },
+            //    new { Id = 3, FirstName = "William", LastName = "Shakespeare", AuthorType = AuthorType.Author },
+            //    new { Id = 4, FirstName = "H.P", LastName = "Lovecraft", AuthorType = AuthorType.Author });
+        }        
     }
 }

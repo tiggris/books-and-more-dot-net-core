@@ -11,7 +11,17 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             builder.Property(publisher => publisher.Name)
                 .IsRequired()
                 .HasMaxLength(100);
+
+            //builder.SeedData(
+            //    new { Id = 1, Name = "Wydawnictwo Rebis" },
+            //    new { Id = 2, Name = "Czarna Owca" },
+            //    new { Id = 3, Name = "Wydawnictwo Znak" });
+
             builder.OwnsOne(publisher => publisher.Address);
+                //.SeedData(
+                //    new { PublisherId = 1 },
+                //    new { PublisherId = 2 },
+                //    new { PublisherId = 3 });
         }
     }
 }
