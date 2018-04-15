@@ -21,11 +21,11 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             builder.Property(author => author.FullName)
                 .HasComputedColumnSql("[FirstName] + ' ' + [LastName]");
 
-            //builder.SeedData(
-            //    new { Id = 1, FirstName = "Adam", LastName = "Mickiewicz", AuthorType = AuthorType.Author },
-            //    new { Id = 2, FirstName = "Juliusz", LastName = "Słowacki", AuthorType = AuthorType.Author },
-            //    new { Id = 3, FirstName = "William", LastName = "Shakespeare", AuthorType = AuthorType.Author },
-            //    new { Id = 4, FirstName = "H.P", LastName = "Lovecraft", AuthorType = AuthorType.Author });
+            builder.HasData(
+                new { Id = 1, FirstName = "Adam", LastName = "Mickiewicz", AuthorType = AuthorType.Author },
+                new { Id = 2, FirstName = "Juliusz", LastName = "Słowacki", AuthorType = AuthorType.Author },
+                new { Id = 3, FirstName = "William", LastName = "Shakespeare", AuthorType = AuthorType.Author },
+                new { Id = 4, FirstName = "H.P", LastName = "Lovecraft", AuthorType = AuthorType.Author });
         }        
     }
 }

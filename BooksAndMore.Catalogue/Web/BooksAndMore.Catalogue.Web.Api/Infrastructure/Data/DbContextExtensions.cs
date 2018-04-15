@@ -34,7 +34,16 @@ namespace BooksAndMore.Catalogue.Web.Api.Infrastructure.Data
             if(!context.Books.Any())
             {
                 var publishers = context.Publishers.Local.ToList();
+                if(!publishers.Any())
+                {
+                    publishers = context.Publishers.ToList();
+                }
+
                 var authors = context.Authors.Local.ToList();
+                if(!authors.Any())
+                {
+                    authors = context.Authors.ToList();
+                }
 
                 var book = new Book("Pan Tadeusz", "9788388736919", null, publishers[0], new[] { authors[0] });
                 book.AddReview(3);

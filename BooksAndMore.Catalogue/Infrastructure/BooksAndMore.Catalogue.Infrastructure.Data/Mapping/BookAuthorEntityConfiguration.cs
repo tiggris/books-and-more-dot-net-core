@@ -11,7 +11,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             builder.ToTable("BookAuthors", "catalogue");
             builder.HasKey(bookAuthor => new { bookAuthor.BookId, bookAuthor.AuthorId });
 
-            //builder.SeedData(
+            //builder.HasData(
             //    new { BookId = 1, AuthorId = 1 },
             //    new { BookId = 2, AuthorId = 1 },
             //    new { BookId = 3, AuthorId = 1 },

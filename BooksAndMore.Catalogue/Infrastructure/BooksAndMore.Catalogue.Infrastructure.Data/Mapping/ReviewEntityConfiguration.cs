@@ -20,7 +20,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             builder.Property(review => review.CreateDate)
                 .HasDefaultValueSql("GetUtcDate()");
 
-            //builder.SeedData(
+            //builder.HasData(
             //    new { Id = 1, BookId = 1, Rating = 3, CreateDate = DateTime.Now },
             //    new { Id = 2, BookId = 1, Rating = 3, CreateDate = DateTime.Now },
             //    new { Id = 3, BookId = 1, Rating = 5, CreateDate = DateTime.Now },

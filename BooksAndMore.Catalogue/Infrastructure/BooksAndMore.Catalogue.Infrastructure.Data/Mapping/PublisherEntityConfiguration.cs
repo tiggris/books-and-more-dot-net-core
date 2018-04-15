@@ -12,16 +12,20 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
                 .IsRequired()
                 .HasMaxLength(100);
 
-            //builder.SeedData(
+            builder.OwnsOne(publisher => publisher.Address, (ownedPropertyBuilder) =>
+            {
+                ownedPropertyBuilder.Property<int>("Id");
+                ownedPropertyBuilder.HasPrincipalKey("Id");
+                //ownedPropertyBuilder.HasData(
+                //    new { Id = 1, Street = "street one" },
+                //    new { Id = 2, Street = "street two" },
+                //    new { Id = 3, Street = "street three" });
+            });
+
+            //builder.HasData(
             //    new { Id = 1, Name = "Wydawnictwo Rebis" },
             //    new { Id = 2, Name = "Czarna Owca" },
             //    new { Id = 3, Name = "Wydawnictwo Znak" });
-
-            builder.OwnsOne(publisher => publisher.Address);
-                //.SeedData(
-                //    new { PublisherId = 1 },
-                //    new { PublisherId = 2 },
-                //    new { PublisherId = 3 });
         }
     }
 }
