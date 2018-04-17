@@ -1,4 +1,4 @@
-﻿using BooksAndMore.Catalogue.Domain.Common;
+﻿using BooksAndMore.Catalogue.Domain.Common.Model;
 using System;
 
 namespace BooksAndMore.Catalogue.Domain.Model.Books.Reviews

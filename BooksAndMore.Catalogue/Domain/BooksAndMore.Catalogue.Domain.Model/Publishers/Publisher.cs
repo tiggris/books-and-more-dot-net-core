@@ -1,4 +1,4 @@
-﻿using BooksAndMore.Catalogue.Domain.Common;
+﻿using BooksAndMore.Catalogue.Domain.Common.Model;
 
 namespace BooksAndMore.Catalogue.Domain.Model.Publishers
 {

@@ -1,4 +1,10 @@
-﻿using BooksAndMore.Catalogue.Infrastructure.Data;
+﻿using BooksAndMore.Catalogue.Application.Queries.TopBooksQuery;
+using BooksAndMore.Catalogue.Domain.Common;
+using BooksAndMore.Catalogue.Domain.Common.Data;
+using BooksAndMore.Catalogue.Domain.Model.Books;
+using BooksAndMore.Catalogue.Infrastructure.Data;
+using BooksAndMore.Catalogue.Infrastructure.Data.Repositories;
+using BooksAndMore.Catalogue.Infrastructure.Data.Repositories.Books;
 using BooksAndMore.Catalogue.Web.Api.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +35,9 @@ namespace BooksAndMore.Catalogue.Web.Api
                     sqlServerOptions => sqlServerOptions.MigrationsAssembly(_migrationsAssemblyName)));
 
             services.AddMvc();
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IQueryProvider, QueryProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +46,7 @@ namespace BooksAndMore.Catalogue.Web.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-
+                
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     serviceScope.ServiceProvider.GetService<BooksCatalogueContext>().Database.Migrate();

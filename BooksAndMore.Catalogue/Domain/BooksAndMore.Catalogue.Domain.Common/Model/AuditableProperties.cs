@@ -1,4 +1,4 @@
-﻿namespace BooksAndMore.Catalogue.Domain.Common
+﻿namespace BooksAndMore.Catalogue.Domain.Common.Model
 {
     public class AuditableProperties
     {
