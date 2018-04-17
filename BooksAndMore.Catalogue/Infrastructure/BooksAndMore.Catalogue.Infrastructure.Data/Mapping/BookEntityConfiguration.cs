@@ -16,7 +16,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             builder.HasMany(book => book.BookAuthors).WithOne(bookAuthor => bookAuthor.Book);
             builder.HasMany(book => book.Reviews).WithOne().IsRequired();
             builder.HasOne(book => book.Publisher).WithMany().IsRequired();
-            //builder.HasQueryFilter(book => book.State == State.Active);
+            builder.HasQueryFilter(book => book.State == State.Active);
             builder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
             builder.UsePropertyAccessMode(PropertyAccessMode.Property);
 
