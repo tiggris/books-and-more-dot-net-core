@@ -1,10 +1,6 @@
-﻿using BooksAndMore.Catalogue.Application.Queries.TopBooksQuery;
-using BooksAndMore.Catalogue.Domain.Common;
-using BooksAndMore.Catalogue.Domain.Common.Data;
-using BooksAndMore.Catalogue.Domain.Model.Books;
+﻿using BooksAndMore.Catalogue.Domain.Common.Data;
 using BooksAndMore.Catalogue.Infrastructure.Data;
 using BooksAndMore.Catalogue.Infrastructure.Data.Repositories;
-using BooksAndMore.Catalogue.Infrastructure.Data.Repositories.Books;
 using BooksAndMore.Catalogue.Web.Api.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
