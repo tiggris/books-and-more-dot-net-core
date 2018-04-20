@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace BooksAndMore.Catalogue.Domain.Model.Books
 {
-    public class Book : IEntity<int>, IAuditable, INotifyPropertyChanged
+    public class Book : IEntity<int>, IAuditable
     {
         public int Id { get; private set; }
         public string Title { get; private set; }
@@ -23,7 +23,7 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books
         public ObservableCollection<BookAuthor> BookAuthors { get; private set; }
         public ObservableCollection<Review> Reviews { get; private set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
 
         protected Book()
         {
@@ -48,13 +48,13 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books
             }
 
             Reviews.Add(new Review(rating, reviewerName, reviewText));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Reviews)));
+            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Reviews)));
         }
 
         public void Delete()
         {
             State = State.Deleted;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(State)));
+            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(State)));
         }
 
         protected ObservableCollection<BookAuthor> GetBookAuthors(IList<Author> authors)

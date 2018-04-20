@@ -11,11 +11,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 
-namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations
+namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations.Migrations
 {
     [DbContext(typeof(BooksCatalogueContext))]
-    [Migration("20180420164903_ModelMappingFix")]
-    partial class ModelMappingFix
+    [Migration("20180420204214_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,12 +23,17 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations
             modelBuilder
                 .HasDefaultSchema("catalogue")
                 .HasAnnotation("ProductVersion", "2.1.0-preview2-30571")
+                .HasAnnotation("Relational:Sequence:.BooksHiLoSequence", "'BooksHiLoSequence', '', '1', '100', '', '', 'Int32', 'False'")
+                .HasAnnotation("Relational:Sequence:.EntityFrameworkHiLoSequence", "'EntityFrameworkHiLoSequence', '', '1', '10', '', '', 'Int64', 'False'")
+                .HasAnnotation("Relational:Sequence:.PublisherIds", "'PublisherIds', '', '1', '1', '', '', 'Int32', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BooksAndMore.Catalogue.Domain.Model.Authors.Author", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "EntityFrameworkHiLoSequence")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<int>("AuthorType");
 
@@ -51,19 +56,14 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations
                     b.ToTable("Authors");
 
                     b.HasDiscriminator<int>("AuthorType").HasValue(0);
-
-                    b.HasData(
-                        new { Id = 1, AuthorType = 0, FirstName = "Adam", LastName = "Mickiewicz" },
-                        new { Id = 2, AuthorType = 0, FirstName = "Juliusz", LastName = "Słowacki" },
-                        new { Id = 3, AuthorType = 0, FirstName = "William", LastName = "Shakespeare" },
-                        new { Id = 4, AuthorType = 0, FirstName = "H.P", LastName = "Lovecraft" }
-                    );
                 });
 
             modelBuilder.Entity("BooksAndMore.Catalogue.Domain.Model.Books.Book", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "BooksHiLoSequence")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<decimal>("AverageRating")
                         .ValueGeneratedOnUpdate()
@@ -159,7 +159,8 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations
             modelBuilder.Entity("BooksAndMore.Catalogue.Domain.Model.Publishers.Publisher", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEXT VALUE FOR catalogue.PublisherIds");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -236,7 +237,8 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations
                 {
                     b.OwnsOne("BooksAndMore.Catalogue.Domain.Model.Publishers.Address", "Address", b1 =>
                         {
-                            b1.Property<int>("Id");
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd();
 
                             b1.Property<string>("Apartment");
 

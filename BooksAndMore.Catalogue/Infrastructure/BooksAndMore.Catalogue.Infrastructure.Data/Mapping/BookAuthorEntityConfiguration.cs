@@ -14,7 +14,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             // Composite primary key
             builder.HasKey(bookAuthor => new { bookAuthor.BookId, bookAuthor.AuthorId });
 
-            // Data seeding - not working :(
+            // Data seeding
             //builder.HasData(
             //    new { BookId = 1, AuthorId = 1 },
             //    new { BookId = 2, AuthorId = 1 },
@@ -28,7 +28,9 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             //    new { BookId = 9, AuthorId = 3 },
             //    new { BookId = 10, AuthorId = 3 },
             //    new { BookId = 11, AuthorId = 3 },
-            //    new { BookId = 12, AuthorId = 3 });
+            //    new { BookId = 12, AuthorId = 3 },
+            //    new { BookId = 13, AuthorId = 5 },
+            //    new { BookId = 14, AuthorId = 6 });
         }
     }
 }

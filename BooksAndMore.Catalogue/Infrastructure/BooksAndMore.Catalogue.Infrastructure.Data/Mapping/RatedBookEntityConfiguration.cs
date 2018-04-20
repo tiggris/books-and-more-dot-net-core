@@ -11,7 +11,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
         {
             var sql = @"SELECT	book.Id,
 		                        book.Title,
-		                        AVG(CAST(review.Rating AS float)) AS AverageRating
+		                        AVG(CAST(review.Rating AS decimal(3,2))) AS AverageRating
                         FROM    catalogue.Books book INNER JOIN
 	                            catalogue.Reviews review ON review.BookId = book.Id
                         GROUP BY book.Id, book.Title";

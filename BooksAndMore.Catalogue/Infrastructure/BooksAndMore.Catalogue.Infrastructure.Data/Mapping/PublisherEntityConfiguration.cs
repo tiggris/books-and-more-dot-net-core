@@ -8,6 +8,10 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Publisher> builder)
         {
+            // Primary key with identity generated from sequence
+            builder.Property(publisher => publisher.Id)
+                .HasDefaultValueSql("NEXT VALUE FOR catalogue.PublisherIds");
+
             builder.Property(publisher => publisher.Name)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -18,14 +22,14 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
                 ownedPropertyBuilder.Property<int>("Id");
                 ownedPropertyBuilder.HasPrincipalKey("Id");
 
-                // Data seeding - not working :(
+                 //Data seeding
                 //ownedPropertyBuilder.HasData(
-                //    new { Id = 1, Street = "street one" },
-                //    new { Id = 2, Street = "street two" },
-                //    new { Id = 3, Street = "street three" });
+                //    new { Id = 1 },
+                //    new { Id = 2 },
+                //    new { Id = 3 });
             });
 
-            // Data seeding - not working :(
+            // Data seeding
             //builder.HasData(
             //    new { Id = 1, Name = "Wydawnictwo Rebis" },
             //    new { Id = 2, Name = "Czarna Owca" },

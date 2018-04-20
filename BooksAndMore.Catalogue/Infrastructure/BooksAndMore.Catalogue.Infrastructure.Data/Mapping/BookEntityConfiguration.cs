@@ -11,7 +11,9 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
         {
             builder.ToTable("Books"/*, "catalogue"*/);
 
+            // Primary key with HiLo identity generation
             builder.HasKey(book => book.Id);
+            builder.Property(book => book.Id).ForSqlServerUseSequenceHiLo("BooksHiLoSequence");
 
             // Alternate key is not the same as Unique Index
             builder.HasAlternateKey(book => book.Isbn);
@@ -26,7 +28,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             builder.HasQueryFilter(book => book.State == State.Active);
 
             // Change tracking strategy
-            builder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
+            //builder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
             builder.UsePropertyAccessMode(PropertyAccessMode.Property);
 
             // Table per hierarchy inheritance
@@ -61,20 +63,20 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
                 .HasValueGenerator<AverageRatingValueGenerator>()
                 .ValueGeneratedOnUpdate();
 
-            // Data seeding - not working :(
+            // Data seeding
             //builder.HasData(
-            //    new { Id = 1, Title = "Pan Tadeusz", Isbn = "9788388736919", PublisherId = 1, AverageRating = (decimal)0.0, State = State.Active },
-            //    new { Id = 2, Title = "Dziady", Isbn = "9788373899285", PublisherId = 1, AverageRating = (decimal)0.0, State = State.Active },
-            //    new { Id = 3, Title = "Sonety Krymskie", Isbn = "9781500143640", PublisherId = 2, AverageRating = (decimal)0.0, State = State.Active },
-            //    new { Id = 4, Title = "Konrad Wallenrod", Isbn = "9781498181334", PublisherId = 3, AverageRating = (decimal)0.0, State = State.Active },
-            //    new { Id = 5, Title = "Balladyna", Isbn = "9788377916605", PublisherId = 2, AverageRating = (decimal)0.0, State = State.Active },
-            //    new { Id = 6, Title = "Anhelli", Isbn = "9780313208287", PublisherId = 1, AverageRating = (decimal)0.0, State = State.Active },
-            //    new { Id = 7, Title = "Książka, której nigdy nie było", Isbn = "9876543210112", PublisherId = 3, AverageRating = (decimal)0.0, State = State.Active },
-            //    new { Id = 8, Title = "Makbet", Isbn = "9788496509290", PublisherId = 2, AverageRating = (decimal)0.0, State = State.Active },
-            //    new { Id = 9, Title = "Hamlet", Isbn = "9781348101864", PublisherId = 2, AverageRating = (decimal)0.0, State = State.Active },
-            //    new { Id = 10, Title = "Romeo i Julia", Isbn = "9781387317844", PublisherId = 1, AverageRating = (decimal)0.0, State = State.Active },
-            //    new { Id = 11, Title = "Ryszard III", Isbn = "9789510422311", PublisherId = 1, AverageRating = (decimal)0.0, State = State.Active },
-            //    new { Id = 12, Title = "Wiele hałasu o nic", Isbn = "9781480297890", PublisherId = 3, AverageRating = (decimal)0.0, State = State.Active });
+            //    new { Id = 1, Title = "Pan Tadeusz", Isbn = "9788388736919", PublisherId = 1, State = State.Active },
+            //    new { Id = 2, Title = "Dziady", Isbn = "9788373899285", PublisherId = 1, State = State.Active },
+            //    new { Id = 3, Title = "Sonety Krymskie", Isbn = "9781500143640", PublisherId = 2, State = State.Active },
+            //    new { Id = 4, Title = "Konrad Wallenrod", Isbn = "9781498181334", PublisherId = 3, State = State.Active },
+            //    new { Id = 5, Title = "Balladyna", Isbn = "9788377916605", PublisherId = 2, State = State.Active },
+            //    new { Id = 6, Title = "Anhelli", Isbn = "9780313208287", PublisherId = 1, State = State.Active },
+            //    new { Id = 7, Title = "Książka, której nigdy nie było", Isbn = "9876543210112", PublisherId = 3, State = State.Active },
+            //    new { Id = 8, Title = "Makbet", Isbn = "9788496509290", PublisherId = 2, State = State.Active },
+            //    new { Id = 9, Title = "Hamlet", Isbn = "9781348101864", PublisherId = 2, State = State.Active },
+            //    new { Id = 10, Title = "Romeo i Julia", Isbn = "9781387317844", PublisherId = 1, State = State.Active },
+            //    new { Id = 11, Title = "Ryszard III", Isbn = "9789510422311", PublisherId = 1, State = State.Active },
+            //    new { Id = 12, Title = "Wiele hałasu o nic", Isbn = "9781480297890", PublisherId = 3, State = State.Active });
         }
     }
 }

@@ -8,6 +8,10 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Author> builder)
         {
+            // Primary key with default HiLo sequence
+            builder.Property(author => author.Id)
+                .ForSqlServerUseSequenceHiLo();
+
             builder.HasDiscriminator(author => author.AuthorType)
                 .HasValue<Author>(AuthorType.Author)
                 .HasValue<Illustrator>(AuthorType.Illustrator);
@@ -24,11 +28,13 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
                 .HasComputedColumnSql("[FirstName] + ' ' + [LastName]");
 
             // Data seeding
-            builder.HasData(
-                new { Id = 1, FirstName = "Adam", LastName = "Mickiewicz", AuthorType = AuthorType.Author },
-                new { Id = 2, FirstName = "Juliusz", LastName = "Słowacki", AuthorType = AuthorType.Author },
-                new { Id = 3, FirstName = "William", LastName = "Shakespeare", AuthorType = AuthorType.Author },
-                new { Id = 4, FirstName = "H.P", LastName = "Lovecraft", AuthorType = AuthorType.Author });
+            //builder.HasData(
+            //    new { Id = 1, FirstName = "Adam", LastName = "Mickiewicz", AuthorType = AuthorType.Author },
+            //    new { Id = 2, FirstName = "Juliusz", LastName = "Słowacki", AuthorType = AuthorType.Author },
+            //    new { Id = 3, FirstName = "William", LastName = "Shakespeare", AuthorType = AuthorType.Author },
+            //    new { Id = 4, FirstName = "H.P", LastName = "Lovecraft", AuthorType = AuthorType.Author },
+            //    new { Id = 5, FirstName = "Antoine", LastName = "de Saint-Exupéry", AuthorType = AuthorType.Author },
+            //    new { Id = 6, FirstName = "A.A", LastName = "Milne", AuthorType = AuthorType.Author });
         }        
     }
 }

@@ -28,6 +28,16 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
             // Default schema for all tables
             modelBuilder.HasDefaultSchema("catalogue");
 
+            // Sequence definition
+            modelBuilder.HasSequence<int>("PublisherIds"/*, schema: "catalogue"*/)
+                .StartsAt(1)
+                .IncrementsBy(1);
+
+            // HiLo sequence definition
+            modelBuilder.HasSequence<int>("BooksHiLoSequence")
+                .StartsAt(1)
+                .IncrementsBy(100);
+
             // Global owned type definition
             modelBuilder.Owned<Address>();
 

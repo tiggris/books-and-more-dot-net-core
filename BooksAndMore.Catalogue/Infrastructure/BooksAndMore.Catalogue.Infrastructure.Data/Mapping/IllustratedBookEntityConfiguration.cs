@@ -10,6 +10,11 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
         {
             // Derived type from Book
             builder.HasBaseType<Book>();
+
+            // Data seeding
+            //builder.HasData(
+            //    new { Id = 13, Title = "Mały Książę", Isbn = "9788995317471", PublisherId = 3, State = State.Active, IsIllustrated = true },
+            //    new { Id = 14, Title = "Kubuś Puchatek", Isbn = "9782230001040", PublisherId = 1, State = State.Active, IsIllustrated = true });
         }
     }
 }
