@@ -41,6 +41,11 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
             // Global owned type definition
             modelBuilder.Owned<Address>();
 
+            // DB function
+            modelBuilder.HasDbFunction(() => UserDefinedFunctions.ReviewsCount(default(int)))
+                .HasName("ReviewsCount")
+                .HasSchema("catalogue");
+
             // Query type
             modelBuilder.RatedBookQuery(Books);
 
