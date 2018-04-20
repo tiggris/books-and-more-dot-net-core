@@ -8,9 +8,13 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<BookAuthor> builder)
         {
+            // Join table entity
             builder.ToTable("BookAuthors", "catalogue");
+
+            // Composite primary key
             builder.HasKey(bookAuthor => new { bookAuthor.BookId, bookAuthor.AuthorId });
 
+            // Data seeding - not working :(
             //builder.HasData(
             //    new { BookId = 1, AuthorId = 1 },
             //    new { BookId = 2, AuthorId = 1 },

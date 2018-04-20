@@ -18,9 +18,12 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             builder.Property(author => author.LastName)
                 .IsRequired()
                 .HasMaxLength(50);
+
+            // Property with computed column
             builder.Property(author => author.FullName)
                 .HasComputedColumnSql("[FirstName] + ' ' + [LastName]");
 
+            // Data seeding
             builder.HasData(
                 new { Id = 1, FirstName = "Adam", LastName = "Mickiewicz", AuthorType = AuthorType.Author },
                 new { Id = 2, FirstName = "Juliusz", LastName = "Słowacki", AuthorType = AuthorType.Author },

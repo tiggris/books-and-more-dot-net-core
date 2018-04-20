@@ -9,25 +9,51 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Book> builder)
         {
-            builder.ToTable("Books", "catalogue");
+            builder.ToTable("Books"/*, "catalogue"*/);
+
             builder.HasKey(book => book.Id);
+
+            // Alternate key is not the same as Unique Index
             builder.HasAlternateKey(book => book.Isbn);
             builder.HasIndex(book => book.Isbn).IsUnique();
+
+            // One-to-one and One-to-many relationships
+            builder.HasOne(book => book.Publisher).WithMany().IsRequired();
             builder.HasMany(book => book.BookAuthors).WithOne(bookAuthor => bookAuthor.Book);
             builder.HasMany(book => book.Reviews).WithOne().IsRequired();
-            builder.HasOne(book => book.Publisher).WithMany().IsRequired();
+
+            // Query filter
             builder.HasQueryFilter(book => book.State == State.Active);
+
+            // Change tracking strategy
             builder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
             builder.UsePropertyAccessMode(PropertyAccessMode.Property);
 
+            // Table per hierarchy inheritance
             builder.HasDiscriminator(book => book.IsIllustrated)
                 .HasValue<Book>(false)
                 .HasValue<IllustratedBook>(true);
 
-            MapTitleProperty(builder);
-            MapIsbnProperty(builder);
-            MapStateProperty(builder);
+            // Property with max length
+            builder.Property("Title")
+                .IsRequired()
+                .HasMaxLength(100);
 
+            // Property with field access mode 
+            builder.Property("Isbn")
+                .IsRequired()
+                .HasMaxLength(13)
+                .HasColumnName("ISBN")
+                .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+            // Enum property mapped to string value with default value
+            builder.Property("State")
+                .IsRequired()
+                .HasMaxLength(20)
+                .HasConversion<string>()
+                .HasDefaultValue(State.Active);
+
+            // Property with specified column type and value generator
             builder.Property(book => book.AverageRating)
                 .IsRequired()
                 .HasColumnType("decimal(3,2)")
@@ -35,6 +61,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
                 .HasValueGenerator<AverageRatingValueGenerator>()
                 .ValueGeneratedOnUpdate();
 
+            // Data seeding - not working :(
             //builder.HasData(
             //    new { Id = 1, Title = "Pan Tadeusz", Isbn = "9788388736919", PublisherId = 1, AverageRating = (decimal)0.0, State = State.Active },
             //    new { Id = 2, Title = "Dziady", Isbn = "9788373899285", PublisherId = 1, AverageRating = (decimal)0.0, State = State.Active },
@@ -48,32 +75,6 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             //    new { Id = 10, Title = "Romeo i Julia", Isbn = "9781387317844", PublisherId = 1, AverageRating = (decimal)0.0, State = State.Active },
             //    new { Id = 11, Title = "Ryszard III", Isbn = "9789510422311", PublisherId = 1, AverageRating = (decimal)0.0, State = State.Active },
             //    new { Id = 12, Title = "Wiele hałasu o nic", Isbn = "9781480297890", PublisherId = 3, AverageRating = (decimal)0.0, State = State.Active });
-        }
-
-        public static void MapTitleProperty(EntityTypeBuilder builder)
-        {
-            builder.Property("Title")
-                .HasColumnName("Title")
-                .IsRequired()
-                .HasMaxLength(100);
-        }
-
-        public static void MapIsbnProperty(EntityTypeBuilder builder)
-        {
-            builder.Property("Isbn")
-               .IsRequired()
-               .HasMaxLength(13)
-               .HasColumnName("ISBN")
-               .UsePropertyAccessMode(PropertyAccessMode.Field);
-        }
-
-        public static void MapStateProperty(EntityTypeBuilder builder)
-        {
-            builder.Property("State")
-                .HasColumnName("State")
-                .HasConversion<string>()
-                .HasColumnType("nvarchar(20)")
-                .HasDefaultValueSql($"N'Active'");
         }
     }
 }

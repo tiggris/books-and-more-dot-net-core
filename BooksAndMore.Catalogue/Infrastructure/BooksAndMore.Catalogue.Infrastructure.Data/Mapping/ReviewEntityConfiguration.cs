@@ -1,7 +1,6 @@
 ﻿using BooksAndMore.Catalogue.Domain.Model.Books.Reviews;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
 namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
 {
@@ -14,12 +13,17 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
                 .IsRequired();
             builder.Property(review => review.ReviewerName)
                 .HasMaxLength(50);
+
+            // Field mapping
             builder.Property(review => review.ReviewText)
                 .HasField("_reviewEncodedText")
                 .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+            // Property with default value
             builder.Property(review => review.CreateDate)
                 .HasDefaultValueSql("GetUtcDate()");
 
+            // Data seeding - not working :(
             //builder.HasData(
             //    new { Id = 1, BookId = 1, Rating = 3, CreateDate = DateTime.Now },
             //    new { Id = 2, BookId = 1, Rating = 3, CreateDate = DateTime.Now },

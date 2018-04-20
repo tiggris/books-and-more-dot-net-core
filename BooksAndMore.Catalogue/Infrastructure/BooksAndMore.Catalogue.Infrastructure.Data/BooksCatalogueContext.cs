@@ -3,7 +3,6 @@ using BooksAndMore.Catalogue.Domain.Model.Books;
 using BooksAndMore.Catalogue.Domain.Model.Publishers;
 using BooksAndMore.Catalogue.Infrastructure.Data.Mapping;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace BooksAndMore.Catalogue.Infrastructure.Data
 {
@@ -26,10 +25,17 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Default schema for all tables
             modelBuilder.HasDefaultSchema("catalogue");
 
+            // Global owned type definition
+            modelBuilder.Owned<Address>();
+
+            // Query type
+            modelBuilder.RatedBookQuery(Books);
+
+            // Entity configurations
             modelBuilder.ApplyConfiguration(new BookEntityConfiguration());
-            //modelBuilder.ApplyConfiguration(new BookInfoEntityConfiguration());
             modelBuilder.ApplyConfiguration(new IllustratedBookEntityConfiguration());
             modelBuilder.ApplyConfiguration(new AuthorEntityConfiguration());
             modelBuilder.ApplyConfiguration(new IllustratorEntityConfiguration());
@@ -38,27 +44,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new PublisherEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ReviewEntityConfiguration());
 
-            SetRatedBookQuery(modelBuilder);
-
             base.OnModelCreating(modelBuilder);
-        }
-
-        private void SetRatedBookQuery(ModelBuilder modelBuilder)
-        {
-            var sql = @"SELECT	book.Id,
-		                        book.Title,
-		                        AVG(CAST(review.Rating AS float)) AS AverageRating
-                        FROM    catalogue.Books book INNER JOIN
-	                            catalogue.Reviews review ON review.BookId = book.Id
-                        GROUP BY book.Id, book.Title";
-
-            modelBuilder.Query<RatedBook>()
-                .ToQuery(() => Books.FromSql(sql).Select(query => new RatedBook
-                {
-                    Id = query.Id,
-                    Title = query.Title,
-                    AverageRating = query.AverageRating
-                }));
         }
     }
 }

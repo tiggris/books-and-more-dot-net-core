@@ -8,6 +8,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<IllustratedBook> builder)
         {
+            // Derived type from Book
             builder.HasBaseType<Book>();
         }
     }

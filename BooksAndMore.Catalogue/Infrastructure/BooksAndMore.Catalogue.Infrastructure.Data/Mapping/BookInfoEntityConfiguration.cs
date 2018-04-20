@@ -11,11 +11,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             builder.ToTable("Books", "catalogue");
             builder.HasKey(bookInfo => bookInfo.Id);
             builder.HasOne<Book>().WithOne().HasForeignKey<Book>(book => book.Id);
-            builder.HasQueryFilter(bookInfo => bookInfo.State == State.Active);
-
-            BookEntityConfiguration.MapTitleProperty(builder);
-            BookEntityConfiguration.MapIsbnProperty(builder);
-            BookEntityConfiguration.MapStateProperty(builder);            
+            builder.HasQueryFilter(bookInfo => bookInfo.State == State.Active);      
         }
     }
 }

@@ -8,6 +8,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Illustrator> builder)
         {
+            // Derived type from Author
             builder.HasBaseType<Author>();
         }
     }
