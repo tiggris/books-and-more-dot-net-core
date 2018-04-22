@@ -4,9 +4,6 @@ namespace BooksAndMore.Catalogue.Domain.Common
 {
     public class DateTimeProvider
     {
-        public static DateTime GetCurrentDateTime()
-        {
-            return DateTime.UtcNow;
-        }
+        public static DateTime CurrentDateTime => DateTime.UtcNow;
     }
 }

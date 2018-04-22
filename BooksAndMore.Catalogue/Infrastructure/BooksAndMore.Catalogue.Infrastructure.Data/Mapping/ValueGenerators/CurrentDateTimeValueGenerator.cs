@@ -1,16 +1,17 @@
-﻿using BooksAndMore.Catalogue.Domain.Model.Books;
+﻿using BooksAndMore.Catalogue.Domain.Common;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
+using System;
 
 namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping.ValueGenerators
 {
-    public class DefaultStateValueGenerator : ValueGenerator<string>
+    public class CurrentDateTimeValueGenerator : ValueGenerator<DateTime>
     {
         public override bool GeneratesTemporaryValues => false;
 
-        public override string Next(EntityEntry entry)
+        public override DateTime Next(EntityEntry entry)
         {
-            return State.Active.ToString();
+            return DateTimeProvider.CurrentDateTime;
         }
     }
 }

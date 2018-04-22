@@ -1,8 +1,11 @@
-﻿using BooksAndMore.Catalogue.Domain.Model.Authors;
+﻿using BooksAndMore.Catalogue.Domain.Common.Model;
+using BooksAndMore.Catalogue.Domain.Model.Authors;
 using BooksAndMore.Catalogue.Domain.Model.Books;
 using BooksAndMore.Catalogue.Domain.Model.Publishers;
 using BooksAndMore.Catalogue.Infrastructure.Data.Mapping;
+using BooksAndMore.Catalogue.Infrastructure.Data.Mapping.ValueGenerators;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace BooksAndMore.Catalogue.Infrastructure.Data
 {
@@ -59,7 +62,36 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new PublisherEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ReviewEntityConfiguration());
 
+            ConfigureShadowProperties(modelBuilder);
+
             base.OnModelCreating(modelBuilder);
+        }
+
+        private void ConfigureShadowProperties(ModelBuilder modelBuilder)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                // Add CreatedAt/UpdatedAt properties to entities
+                if (typeof(IAuditable).IsAssignableFrom(entityType.ClrType))
+                {
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<DateTime>(AuditableProperties.CreatedAt)
+                        .IsRequired()
+                        .HasDefaultValueSql("GETUTCDATE()");
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<DateTime>(AuditableProperties.UpdatedAt)
+                        .IsRequired()
+                        .HasDefaultValueSql("GETUTCDATE()")
+                        .HasValueGenerator<CurrentDateTimeValueGenerator>()
+                        .ValueGeneratedOnUpdate();
+                }
+
+                // Add RowVersion property to entities
+                if (typeof(IVersioned).IsAssignableFrom(entityType.ClrType))
+                {
+                    modelBuilder.Entity(entityType.ClrType).Property<byte[]>("RowVersion").IsRowVersion();
+                }
+            }
         }
     }
 }
