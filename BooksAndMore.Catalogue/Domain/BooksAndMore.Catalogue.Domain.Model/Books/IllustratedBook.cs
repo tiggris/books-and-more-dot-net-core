@@ -7,7 +7,7 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books
 {
     public class IllustratedBook : Book
     {
-        public ICollection<BookIllustrator> Illustrators { get; private set; }
+        public virtual ICollection<BookIllustrator> Illustrators { get; private set; }
 
         private IllustratedBook()
         {

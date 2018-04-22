@@ -6,8 +6,8 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books
     {
         public int BookId { get; private set; }
         public int IllustratorId { get; private set; }
-        public IllustratedBook Book { get; private set; }
-        public Illustrator Illustrator { get; private set; }
+        public virtual IllustratedBook Book { get; private set; }
+        public virtual Illustrator Illustrator { get; private set; }
 
         private BookIllustrator() { }
 

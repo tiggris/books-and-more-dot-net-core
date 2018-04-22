@@ -6,7 +6,7 @@ namespace BooksAndMore.Catalogue.Domain.Model.Publishers
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
-        public Address Address { get; private set; }
+        public virtual Address Address { get; private set; }
 
         private Publisher() { }
 

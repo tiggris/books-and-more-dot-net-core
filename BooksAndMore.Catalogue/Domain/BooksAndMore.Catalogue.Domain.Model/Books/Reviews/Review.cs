@@ -13,7 +13,7 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books.Reviews
         public string ReviewText => _reviewEncodedText;
         public DateTime CreateDate { get; private set; }
 
-        private Review() { }
+        protected Review() { }
 
         internal Review(int rating, string reviewerName = null, string reviewText = null)
         {

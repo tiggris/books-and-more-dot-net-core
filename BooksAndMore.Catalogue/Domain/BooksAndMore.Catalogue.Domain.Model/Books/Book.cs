@@ -5,7 +5,6 @@ using BooksAndMore.Catalogue.Domain.Model.Publishers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 
 namespace BooksAndMore.Catalogue.Domain.Model.Books
@@ -19,9 +18,9 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books
         public decimal AverageRating { get; private set; }
         public bool IsIllustrated { get; private set; }
         public State State { get; private set; }
-        public Publisher Publisher { get; private set; }
-        public ObservableCollection<BookAuthor> BookAuthors { get; private set; }
-        public ObservableCollection<Review> Reviews { get; private set; }
+        public virtual Publisher Publisher { get; private set; }
+        public virtual ObservableCollection<BookAuthor> BookAuthors { get; private set; }
+        public virtual ObservableCollection<Review> Reviews { get; private set; }
 
         //public event PropertyChangedEventHandler PropertyChanged;
 
@@ -29,7 +28,13 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books
         {
             Reviews = new ObservableCollection<Review>();
             BookAuthors = new ObservableCollection<BookAuthor>();
-        }        
+        }
+
+        public Book(int id, string isbn) : this()
+        {
+            Id = id;
+            Isbn = isbn;
+        }
 
         public Book(string title, string isbn, string description, Publisher publisher, IList<Author> authors): this()
         {
@@ -49,6 +54,13 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books
 
             Reviews.Add(new Review(rating, reviewerName, reviewText));
             //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Reviews)));
+        }
+
+        public void Update(string title, string isbn, string description)
+        {
+            Title = title;
+            Isbn = isbn;
+            Description = description;
         }
 
         public void Delete()
