@@ -10,206 +10,264 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
     [TestClass]
     public class BooksTests : TestBase
     {
-        [TestInitialize]
-        public void Initialize()
-        {
-            ReloadContext();
-        }
+        private const string _isbn = "9782266165716";
 
         [TestCleanup]
         public void Cleanup()
         {
-            _context.Books.RemoveRange(_context.Books.ToList());
-            _context.SaveChanges();
+            using (var context = CreateNewContext())
+            {
+                var book = FindBook(context);
+                if(book != null)
+                {
+                    context.Books.Remove(book);
+                    context.SaveChanges();
+                }
+            }
         }
 
         [TestMethod]
-        public void CreateBookTest()
+        public void AddBook_Should_AddBookToDatabase()
         {
             // Arrange
-            var author = new Author("Harlan", "Coben");
-            var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
+            var book = CreateBook();
 
             // Act
-            _context.Add(book);
-            _context.SaveChanges();
-            ReloadContext();
+            using (var context = CreateNewContext())
+            {
+                context.Add(book);
+                context.SaveChanges();
+            }
 
             // Assert
-            var result = _context.Books.Find(book.Id);
-            Assert.IsNotNull(result);
-            Assert.AreEqual(book.Id, result.Id);
+            using (var context = CreateNewContext())
+            {
+                var result = context.Books.Find(book.Id);
+                Assert.IsNotNull(result);
+                Assert.AreEqual(book.Id, result.Id);
+            }
         }
 
         [TestMethod]
-        public void UpdateBookTest()
+        public void UpdateRetrievedBook_Should_UpdateBookInDatabase()
         {
             // Arrange
-            const string newTitle = "Nie mów nikomu!";
-            var author = new Author("Harlan", "Coben");
-            var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
-            _context.Add(book);
-            _context.SaveChanges();
-            ReloadContext();
+            const string newTitle = "Chirurg!";
+
+            using (var context = CreateNewContext())
+            {
+                var book = CreateBook();
+                context.Add(book);
+                context.SaveChanges();
+            }
 
             // Act
-            book = _context.Books.Find(book.Id);
-            book.Update(newTitle, book.Isbn, book.Description);
-            _context.SaveChanges();
-            ReloadContext();
+            using (var context = CreateNewContext())
+            {
+                var book = FindBook(context);
+                book.Update(newTitle, book.Isbn, book.Description);
+                context.SaveChanges();
+            }
 
             // Assert
-            var result = _context.Books.Find(book.Id);
-            Assert.IsNotNull(result);
-            Assert.AreEqual(newTitle, result.Title);
+            using (var context = CreateNewContext())
+            {
+                var result = FindBook(context);
+                Assert.IsNotNull(result);
+                Assert.AreEqual(newTitle, result.Title);
+            }
         }
 
         [TestMethod]
-        public void UpdateAttachedBookTest()
+        public void UpdateAttachedBook_Should_UpdateBookInDatabase()
         {
             // Arrange
-            const string newTitle = "Nie mów nikomu!";
-            var author = new Author("Harlan", "Coben");
-            var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
-            _context.Add(book);
-            _context.SaveChanges();
-            ReloadContext();
+            const string newTitle = "Chirurg!";
+            var book = CreateBook();
+
+            using (var context = CreateNewContext())
+            {
+                context.Add(book);
+                context.SaveChanges();
+            }
 
             // Act
-            _context.Books.Attach(book);
-            book.Update(newTitle, book.Isbn, book.Description);
-            _context.SaveChanges();
-            ReloadContext();
+            using (var context = CreateNewContext())
+            {
+                context.Books.Attach(book);
+                book.Update(newTitle, book.Isbn, book.Description);
+                context.SaveChanges();
+            }
 
             // Assert
-            var result = _context.Books.Find(book.Id);
-            Assert.IsNotNull(result);
-            Assert.AreEqual(newTitle, result.Title);
+            using (var context = CreateNewContext())
+            {
+                var result = FindBook(context);
+                Assert.IsNotNull(result);
+                Assert.AreEqual(newTitle, result.Title);
+            }
         }
 
         [TestMethod]
-        public void UpdateModifiedBookTest()
+        public void UpdateBook_Should_UpdateBookInDatabase()
         {
             // Arrange
-            const string newTitle = "Nie mów nikomu!";
-            var author = new Author("Harlan", "Coben");
-            var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
-            _context.Add(book);
-            _context.SaveChanges();
-            ReloadContext();
+            const string newTitle = "Chirurg!";
+            var book = CreateBook();
+
+            using (var context = CreateNewContext())
+            {
+                context.Add(book);
+                context.SaveChanges();
+            }
 
             // Act
-            book.Update(newTitle, book.Isbn, book.Description);
-            _context.Books.Update(book);
-            _context.SaveChanges();
-            ReloadContext();
+            using (var context = CreateNewContext())
+            {
+                book.Update(newTitle, book.Isbn, book.Description);
+                context.Books.Update(book);
+                context.SaveChanges();
+            }
 
             // Assert
-            var result = _context.Books.Find(book.Id);
-            Assert.IsNotNull(result);
-            Assert.AreEqual(newTitle, result.Title);
+            using (var context = CreateNewContext())
+            {
+                var result = FindBook(context);
+                Assert.IsNotNull(result);
+                Assert.AreEqual(newTitle, result.Title);
+            }
         }
 
         [TestMethod]
-        public void DeleteBookTest()
+        public void RemoveBook_Should_DeleteBookInDatabase()
         {
             // Arrange
-            var author = new Author("Harlan", "Coben");
-            var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
-            _context.Add(book);
-            _context.SaveChanges();
-            ReloadContext();
+            var book = CreateBook();
+
+            using (var context = CreateNewContext())
+            {
+                context.Add(book);
+                context.SaveChanges();
+            }
 
             // Act
-            _context.Books.Remove(book);
-            _context.SaveChanges();
-            ReloadContext();
+            using (var context = CreateNewContext())
+            {
+                context.Books.Remove(book);
+                context.SaveChanges();
+            }
 
             // Assert
-            var result = _context.Books.Find(book.Id);
-            Assert.IsNull(result);
+            using (var context = CreateNewContext())
+            {
+                var result = FindBook(context);
+                Assert.IsNull(result);
+            }
         }
 
         [TestMethod]
-        public void DeleteAttachedBookTest()
+        public void RemoveAttachedBook_Should_DeleteBookInDatabase()
         {
             // Arrange
-            var author = new Author("Harlan", "Coben");
-            var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
-            _context.Add(book);
-            _context.SaveChanges();
-            ReloadContext();
+            var book = CreateBook();
+
+            using (var context = CreateNewContext())
+            {
+                context.Add(book);
+                context.SaveChanges();
+            }
 
             // Act
-            var bookToRemove = new Book(book.Id, book.Isbn);
-            _context.Books.Remove(bookToRemove);
-            _context.SaveChanges();
-            ReloadContext();
+            using (var context = CreateNewContext())
+            {
+                var bookToRemove = new Book(book.Id, book.Isbn);
+                context.Books.Remove(bookToRemove);
+                context.SaveChanges();
+            }
 
             // Assert
-            var result = _context.Books.Find(book.Id);
-            Assert.IsNull(result);
+            using (var context = CreateNewContext())
+            {
+                var result = FindBook(context);
+                Assert.IsNull(result);
+            }
         }
 
         [TestMethod]
-        public void AddReviewsOnCreateTest()
+        public void AddReviewsOnCreatedBook_Should_CreateBookWithReviewsAndAverageRating()
         {
             // Arrange
-            var author = new Author("Harlan", "Coben");
-            var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
+            var book = CreateBook();
             book.AddReview(3, "Jakiœ goœæ", "Œrednia ksi¹¿ka");
             book.AddReview(5, "Coben lover", "Œwietna powieœæ!");
             book.AddReview(1, "Krytyk literatury", "Mog³o byæ lepiej");
 
             // Act
-            _context.Add(book);
-            _context.SaveChanges();
-            ReloadContext();
+            using (var context = CreateNewContext())
+            {
+                context.Add(book);
+                context.SaveChanges();
+            }
 
             // Assert
-            var result = _context.Books.Find(book.Id);
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Reviews.Any());
-            Assert.AreEqual(3, result.Reviews.Count);
-            Assert.IsNotNull(result.Reviews.Single(review => review.Rating == 1));
-            Assert.IsNotNull(result.Reviews.Single(review => review.Rating == 3));
-            Assert.IsNotNull(result.Reviews.Single(review => review.Rating == 5));
+            using (var context = CreateNewContext())
+            {
+                var result = FindBook(context);
+                Assert.IsNotNull(result);
+                Assert.IsTrue(result.Reviews.Any());
+                Assert.AreEqual(3, result.Reviews.Count);
+                Assert.IsNotNull(result.Reviews.Single(review => review.Rating == 1));
+                Assert.IsNotNull(result.Reviews.Single(review => review.Rating == 3));
+                Assert.IsNotNull(result.Reviews.Single(review => review.Rating == 5));
+                Assert.AreEqual(3, result.AverageRating);
+            }
         }
 
         [TestMethod]
-        public void AddReviewsTest()
+        public void AddReviewsOnAttachedBook_Should_CreateReviewsInDatabase()
         {
             // Arrange
-            var author = new Author("Harlan", "Coben");
-            var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
-            _context.Add(book);
-            _context.SaveChanges();
-            ReloadContext();
+            var book = CreateBook();
+            using (var context = CreateNewContext())
+            {
+                context.Add(book);
+                context.SaveChanges();
+            }
 
             // Act
-            book.AddReview(3, "Jakiœ goœæ", "Œrednia ksi¹¿ka");
-            book.AddReview(5, "Coben lover", "Œwietna powieœæ!");
-            book.AddReview(1, "Krytyk literatury", "Mog³o byæ lepiej");
-            _context.Books.Attach(book);
-            _context.SaveChanges();
-            ReloadContext();
+            using (var context = CreateNewContext())
+            {
+                book.AddReview(3, "Jakiœ goœæ", "Œrednia ksi¹¿ka");
+                book.AddReview(5, "Coben lover", "Œwietna powieœæ!");
+                book.AddReview(1, "Krytyk literatury", "Mog³o byæ lepiej");
+                context.Books.Attach(book);
+                context.SaveChanges();
+            }
 
             // Assert
-            var result = _context.Books.Find(book.Id);
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Reviews.Any());
-            Assert.AreEqual(3, result.Reviews.Count);
-            Assert.IsNotNull(result.Reviews.Single(review => review.Rating == 1));
-            Assert.IsNotNull(result.Reviews.Single(review => review.Rating == 3));
-            Assert.IsNotNull(result.Reviews.Single(review => review.Rating == 5));
+            using (var context = CreateNewContext())
+            {
+                var result = FindBook(context);
+                Assert.IsNotNull(result);
+                Assert.IsTrue(result.Reviews.Any());
+                Assert.AreEqual(3, result.Reviews.Count);
+                Assert.IsNotNull(result.Reviews.Single(review => review.Rating == 1));
+                Assert.IsNotNull(result.Reviews.Single(review => review.Rating == 3));
+                Assert.IsNotNull(result.Reviews.Single(review => review.Rating == 5));
+            }
+        }
+
+        private Book CreateBook()
+        {
+            var author = new Author("Tess", "Gerritsen");
+            var publisher = new Publisher("Wydawnictwo Literackie");
+            var book = new Book("Chirurg", _isbn, "Niez³y thriller", publisher, new List<Author> { author });
+            return book;
+        }
+
+        private Book FindBook(BooksCatalogueContext context)
+        {
+            return context.Books.SingleOrDefault(book => book.Isbn == _isbn);
         }
     }
 }

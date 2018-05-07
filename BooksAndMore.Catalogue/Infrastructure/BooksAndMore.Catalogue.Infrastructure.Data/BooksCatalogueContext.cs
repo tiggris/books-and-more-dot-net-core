@@ -39,12 +39,17 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
 
             // Sequence definition
             modelBuilder.HasSequence<int>("PublisherIds"/*, schema: "catalogue"*/)
-                .StartsAt(1)
+                .StartsAt(100)
                 .IncrementsBy(1);
 
             // HiLo sequence definition
             modelBuilder.HasSequence<int>("BooksHiLoSequence")
-                .StartsAt(1)
+                .StartsAt(100)
+                .IncrementsBy(100);
+
+            // HiLo sequence definition
+            modelBuilder.HasSequence<int>("AuthorsHiLoSequence")
+                .StartsAt(100)
                 .IncrementsBy(100);
 
             // Global owned type definition

@@ -10,7 +10,6 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
     {
         private static readonly string _connectionString;
         private const string _migrationsAssemblyName = "BooksAndMore.Catalogue.Infrastructure.Data.Migrations";
-        protected static BooksCatalogueContext _context;
         protected static DbContextOptionsBuilder<BooksCatalogueContext> _optionsBuilder;
 
         static TestBase()
@@ -19,17 +18,22 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
         }
 
         [AssemblyInitialize]
-        public static void AssemblyInitialize(TestContext context)
+        public static void AssemblyInitialize(TestContext testContext)
         {            
             _optionsBuilder = GetOptionsBuilder();
-            _context = new BooksCatalogueContext(_optionsBuilder.Options);
-            _context.Database.Migrate();
+            using (var context = CreateNewContext())
+            {
+                context.Database.Migrate();
+            }            
         }
 
         [AssemblyCleanup]
         public static void AssemblyCleanup()
         {
-            _context.Database.EnsureDeleted();
+            using (var context = CreateNewContext())
+            {
+                context.Database.EnsureDeleted();
+            }
         }
 
         private static DbContextOptionsBuilder<BooksCatalogueContext> GetOptionsBuilder()
@@ -49,10 +53,9 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
             return optionsBuilder;
         }
 
-        public static void ReloadContext()
+        protected static BooksCatalogueContext CreateNewContext()
         {
-            _context.Dispose();
-            _context = new BooksCatalogueContext(_optionsBuilder.Options);
+            return new BooksCatalogueContext(_optionsBuilder.Options);
         }
     }
 }

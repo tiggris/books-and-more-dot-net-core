@@ -10,7 +10,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
         {
             // Primary key with default HiLo sequence
             builder.Property(author => author.Id)
-                .ForSqlServerUseSequenceHiLo();
+                .ForSqlServerUseSequenceHiLo("AuthorsHiLoSequence");
 
             builder.HasDiscriminator(author => author.AuthorType)
                 .HasValue<Author>(AuthorType.Author)

@@ -7,6 +7,26 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropSequence(
+                name: "EntityFrameworkHiLoSequence",
+                schema: "catalogue");
+
+            migrationBuilder.CreateSequence<int>(
+                name: "AuthorsHiLoSequence",
+                schema: "catalogue",
+                startValue: 100L,
+                incrementBy: 100);
+            
+            migrationBuilder.RestartSequence(
+                name: "PublisherIds",
+                schema: "catalogue",
+                startValue: 100L);
+
+            migrationBuilder.RestartSequence(
+                name: "BooksHiLoSequence",
+                schema: "catalogue",
+                startValue: 100L);
+
             migrationBuilder.InsertData(
                 schema: "catalogue",
                 table: "Authors",
@@ -40,20 +60,20 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations.Migrations
                 columns: new[] { "Id", "AverageRating", "CreateDateTime", "Description", "IsIllustrated", "ISBN", "LastUpdateDateTime", "PublisherId", "State", "Title" },
                 values: new object[,]
                 {
-                    { 1, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), null, false, "9788388736919", new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), 1, "Active", "Pan Tadeusz" },
-                    { 2, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), null, false, "9788373899285", new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), 1, "Active", "Dziady" },
-                    { 6, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), null, false, "9780313208287", new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), 1, "Active", "Anhelli" },
-                    { 10, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), null, false, "9781387317844", new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), 1, "Active", "Romeo i Julia" },
-                    { 11, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), null, false, "9789510422311", new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), 1, "Active", "Ryszard III" },
-                    { 14, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 106, DateTimeKind.Utc), null, true, "9782230001040", new DateTime(2018, 5, 7, 18, 21, 50, 106, DateTimeKind.Utc), 1, "Active", "Kubuś Puchatek" },
-                    { 3, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), null, false, "9781500143640", new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), 2, "Active", "Sonety Krymskie" },
-                    { 5, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), null, false, "9788377916605", new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), 2, "Active", "Balladyna" },
-                    { 8, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), null, false, "9788496509290", new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), 2, "Active", "Makbet" },
-                    { 9, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), null, false, "9781348101864", new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), 2, "Active", "Hamlet" },
-                    { 4, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), null, false, "9781498181334", new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), 3, "Active", "Konrad Wallenrod" },
-                    { 7, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), null, false, "9876543210112", new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), 3, "Active", "Książka, której nigdy nie było" },
-                    { 12, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), null, false, "9781480297890", new DateTime(2018, 5, 7, 18, 21, 50, 103, DateTimeKind.Utc), 3, "Active", "Wiele hałasu o nic" },
-                    { 13, 0m, new DateTime(2018, 5, 7, 18, 21, 50, 105, DateTimeKind.Utc), null, true, "9788995317471", new DateTime(2018, 5, 7, 18, 21, 50, 105, DateTimeKind.Utc), 3, "Active", "Mały Książę" }
+                    { 1, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 789, DateTimeKind.Utc), null, false, "9788388736919", new DateTime(2018, 5, 7, 21, 30, 17, 789, DateTimeKind.Utc), 1, "Active", "Pan Tadeusz" },
+                    { 2, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), null, false, "9788373899285", new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), 1, "Active", "Dziady" },
+                    { 6, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), null, false, "9780313208287", new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), 1, "Active", "Anhelli" },
+                    { 10, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), null, false, "9781387317844", new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), 1, "Active", "Romeo i Julia" },
+                    { 11, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), null, false, "9789510422311", new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), 1, "Active", "Ryszard III" },
+                    { 14, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 792, DateTimeKind.Utc), null, true, "9782230001040", new DateTime(2018, 5, 7, 21, 30, 17, 792, DateTimeKind.Utc), 1, "Active", "Kubuś Puchatek" },
+                    { 3, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), null, false, "9781500143640", new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), 2, "Active", "Sonety Krymskie" },
+                    { 5, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), null, false, "9788377916605", new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), 2, "Active", "Balladyna" },
+                    { 8, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), null, false, "9788496509290", new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), 2, "Deleted", "Makbet" },
+                    { 9, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), null, false, "9781348101864", new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), 2, "Active", "Hamlet" },
+                    { 4, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), null, false, "9781498181334", new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), 3, "Active", "Konrad Wallenrod" },
+                    { 7, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), null, false, "9876543210112", new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), 3, "Active", "Książka, której nigdy nie było" },
+                    { 12, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), null, false, "9781480297890", new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), 3, "Active", "Wiele hałasu o nic" },
+                    { 13, 0m, new DateTime(2018, 5, 7, 21, 30, 17, 792, DateTimeKind.Utc), null, true, "9788995317471", new DateTime(2018, 5, 7, 21, 30, 17, 792, DateTimeKind.Utc), 3, "Active", "Mały Książę" }
                 });
 
             migrationBuilder.InsertData(
@@ -95,43 +115,47 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations.Migrations
                 columns: new[] { "Id", "BookId", "CreateDate", "Rating", "ReviewText", "ReviewerName" },
                 values: new object[,]
                 {
-                    { 30, 10, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 5, null, null },
-                    { 1, 1, new DateTime(2018, 5, 7, 20, 21, 50, 134, DateTimeKind.Local), 3, null, null },
-                    { 24, 7, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 4, null, null },
-                    { 23, 7, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 1, null, null },
-                    { 22, 7, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 3, null, null },
-                    { 2, 1, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 3, null, null },
-                    { 3, 1, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 5, null, null },
-                    { 9, 4, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 4, null, null },
-                    { 8, 4, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 3, null, null },
-                    { 4, 1, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 5, null, null },
-                    { 26, 9, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 4, null, null },
-                    { 5, 2, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 2, null, null },
-                    { 25, 8, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 3, null, null },
-                    { 6, 2, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 3, null, null },
-                    { 17, 5, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 5, null, null },
-                    { 16, 5, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 4, null, null },
-                    { 15, 5, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 3, null, null },
-                    { 14, 5, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 4, null, null },
-                    { 13, 5, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 3, null, null },
-                    { 12, 5, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 2, null, null },
-                    { 11, 5, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 2, null, null },
-                    { 10, 5, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 1, null, null },
-                    { 18, 6, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 1, null, null },
-                    { 19, 6, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 2, null, null },
-                    { 20, 6, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 3, null, null },
-                    { 21, 6, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 5, null, null },
-                    { 27, 10, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 2, null, null },
-                    { 32, 11, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 5, null, null },
-                    { 31, 11, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 5, null, null },
-                    { 28, 10, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 2, null, null },
-                    { 29, 10, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 1, null, null },
-                    { 7, 3, new DateTime(2018, 5, 7, 20, 21, 50, 136, DateTimeKind.Local), 1, null, null }
+                    { 30, 10, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 5, null, null },
+                    { 1, 1, new DateTime(2018, 5, 7, 23, 30, 17, 824, DateTimeKind.Local), 3, null, null },
+                    { 24, 7, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 4, null, null },
+                    { 23, 7, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 1, null, null },
+                    { 22, 7, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 3, null, null },
+                    { 2, 1, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 3, null, null },
+                    { 3, 1, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 5, null, null },
+                    { 9, 4, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 4, null, null },
+                    { 8, 4, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 3, null, null },
+                    { 4, 1, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 5, null, null },
+                    { 26, 9, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 4, null, null },
+                    { 5, 2, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 2, null, null },
+                    { 25, 8, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 3, null, null },
+                    { 6, 2, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 3, null, null },
+                    { 17, 5, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 5, null, null },
+                    { 16, 5, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 4, null, null },
+                    { 15, 5, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 3, null, null },
+                    { 14, 5, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 4, null, null },
+                    { 13, 5, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 3, null, null },
+                    { 12, 5, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 2, null, null },
+                    { 11, 5, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 2, null, null },
+                    { 10, 5, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 1, null, null },
+                    { 18, 6, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 1, null, null },
+                    { 19, 6, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 2, null, null },
+                    { 20, 6, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 3, null, null },
+                    { 21, 6, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 5, null, null },
+                    { 27, 10, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 2, null, null },
+                    { 32, 11, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 5, null, null },
+                    { 31, 11, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 5, null, null },
+                    { 28, 10, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 2, null, null },
+                    { 29, 10, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 1, null, null },
+                    { 7, 3, new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), 1, null, null }
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropSequence(
+                name: "AuthorsHiLoSequence",
+                schema: "catalogue");
+
             migrationBuilder.DeleteData(
                 schema: "catalogue",
                 table: "Authors",
@@ -575,6 +599,21 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations.Migrations
                 table: "Publishers",
                 keyColumn: "Id",
                 keyValue: 3);
+
+            migrationBuilder.CreateSequence(
+                name: "EntityFrameworkHiLoSequence",
+                schema: "catalogue",
+                incrementBy: 10);
+            
+            migrationBuilder.RestartSequence(
+                name: "PublisherIds",
+                schema: "catalogue",
+                startValue: 1L);
+
+            migrationBuilder.RestartSequence(
+                name: "BooksHiLoSequence",
+                schema: "catalogue",
+                startValue: 1L);
         }
     }
 }
