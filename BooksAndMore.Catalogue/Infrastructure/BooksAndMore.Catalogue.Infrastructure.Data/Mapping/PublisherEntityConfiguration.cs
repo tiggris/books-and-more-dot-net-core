@@ -22,18 +22,18 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
                 ownedPropertyBuilder.Property<int>("Id");
                 ownedPropertyBuilder.HasPrincipalKey("Id");
 
-                 //Data seeding
-                //ownedPropertyBuilder.HasData(
-                //    new { Id = 1 },
-                //    new { Id = 2 },
-                //    new { Id = 3 });
+                //Data seeding
+                ownedPropertyBuilder.HasData(
+                    new { Id = 1 },
+                    new { Id = 2 },
+                    new { Id = 3 });
             });
 
             // Data seeding
-            //builder.HasData(
-            //    new { Id = 1, Name = "Wydawnictwo Rebis" },
-            //    new { Id = 2, Name = "Czarna Owca" },
-            //    new { Id = 3, Name = "Wydawnictwo Znak" });
+            builder.HasData(
+                new { Id = 1, Name = "Wydawnictwo Rebis" },
+                new { Id = 2, Name = "Czarna Owca" },
+                new { Id = 3, Name = "Wydawnictwo Znak" });
         }
     }
 }

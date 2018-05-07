@@ -1,4 +1,5 @@
-﻿using BooksAndMore.Catalogue.Domain.Model.Books;
+﻿using BooksAndMore.Catalogue.Domain.Common;
+using BooksAndMore.Catalogue.Domain.Model.Books;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,9 +13,9 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             builder.HasBaseType<Book>();
 
             // Data seeding
-            //builder.HasData(
-            //    new { Id = 13, Title = "Mały Książę", Isbn = "9788995317471", PublisherId = 3, State = State.Active, IsIllustrated = true },
-            //    new { Id = 14, Title = "Kubuś Puchatek", Isbn = "9782230001040", PublisherId = 1, State = State.Active, IsIllustrated = true });
+            builder.HasData(
+                new { Id = 13, Title = "Mały Książę", Isbn = "9788995317471", PublisherId = 3, IsIllustrated = true, State = State.Active, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime },
+                new { Id = 14, Title = "Kubuś Puchatek", Isbn = "9782230001040", PublisherId = 1, IsIllustrated = true, State = State.Active, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime });
         }
     }
 }

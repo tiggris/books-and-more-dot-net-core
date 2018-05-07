@@ -12,9 +12,9 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             builder.HasBaseType<Author>();
 
             // Data seeding
-            //builder.HasData(
-            //    new { Id = 7, FirstName = "Antoine", LastName = "de Saint-Exupéry", AuthorType = AuthorType.Illustrator },
-            //    new { Id = 8, FirstName = "Ernest Howard", LastName = "Shepard", AuthorType = AuthorType.Illustrator });
+            builder.HasData(
+                new { Id = 7, FirstName = "Antoine", LastName = "de Saint-Exupéry", AuthorType = AuthorType.Illustrator },
+                new { Id = 8, FirstName = "Ernest Howard", LastName = "Shepard", AuthorType = AuthorType.Illustrator });
         }
     }
 }
