@@ -8,7 +8,7 @@ namespace BooksAndMore.Catalogue.Domain.Model.Publishers
         public string Name { get; private set; }
         public virtual Address Address { get; private set; }
 
-        private Publisher() { }
+        protected Publisher() { }
 
         public Publisher(string name, string street = null, string building = null, string apartment = null, string city = null, string zipCode = null, string country = null)
         {

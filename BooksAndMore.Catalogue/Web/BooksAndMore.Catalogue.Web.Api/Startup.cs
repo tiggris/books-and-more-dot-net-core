@@ -46,7 +46,6 @@ namespace BooksAndMore.Catalogue.Web.Api
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     var booksCatalogueContext = serviceScope.ServiceProvider.GetService<BooksCatalogueContext>();
-                    booksCatalogueContext.Database.EnsureCreated();
                     booksCatalogueContext.Database.Migrate();
                     booksCatalogueContext.EnsureSeedData();
                 }

@@ -9,6 +9,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
     public abstract class TestBase
     {
         private static readonly string _connectionString;
+        private const string _migrationsAssemblyName = "BooksAndMore.Catalogue.Infrastructure.Data.Migrations";
         protected static BooksCatalogueContext _context;
         protected static DbContextOptionsBuilder<BooksCatalogueContext> _optionsBuilder;
 
@@ -22,7 +23,6 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
         {            
             _optionsBuilder = GetOptionsBuilder();
             _context = new BooksCatalogueContext(_optionsBuilder.Options);
-            _context.Database.EnsureCreated();
             _context.Database.Migrate();
         }
 
@@ -42,7 +42,8 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
             var optionsBuilder = new DbContextOptionsBuilder<BooksCatalogueContext>();
             optionsBuilder
                 .UseLazyLoadingProxies()
-                .UseSqlServer(_connectionString)
+                .UseSqlServer(_connectionString, 
+                    sqlServerOptions => sqlServerOptions.MigrationsAssembly(_migrationsAssemblyName))
                 .UseInternalServiceProvider(serviceProvider);
 
             return optionsBuilder;

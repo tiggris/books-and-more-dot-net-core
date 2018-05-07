@@ -7,17 +7,17 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books
 {
     public class IllustratedBook : Book
     {
-        public virtual ICollection<BookIllustrator> Illustrators { get; private set; }
+        public virtual ICollection<BookIllustrator> BookIllustrators { get; private set; }
 
-        private IllustratedBook()
+        protected IllustratedBook()
         {
-            Illustrators = new HashSet<BookIllustrator>();
+            BookIllustrators = new HashSet<BookIllustrator>();
         }
 
         public IllustratedBook(string title, string isbn, string description, Publisher publisher, IList<Author> authors, IList<Illustrator> illustrators) : 
             base(title, isbn, description, publisher, authors)
         {
-            Illustrators = GetBookIllustrators(illustrators);
+            BookIllustrators = GetBookIllustrators(illustrators);
         }
 
         protected IList<BookIllustrator> GetBookIllustrators(IList<Illustrator> illustrators)

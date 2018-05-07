@@ -37,19 +37,19 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
                 .HasValue<IllustratedBook>(true);
 
             // Property with max length
-            builder.Property("Title")
+            builder.Property(book => book.Title)
                 .IsRequired()
                 .HasMaxLength(100);
 
             // Property with field access mode 
-            builder.Property("Isbn")
+            builder.Property(book => book.Isbn)
                 .IsRequired()
                 .HasMaxLength(13)
                 .HasColumnName("ISBN")
                 .UsePropertyAccessMode(PropertyAccessMode.Field);
 
             // Enum property mapped to string value with default value
-            builder.Property("State")
+            builder.Property(book => book.State)
                 .IsRequired()
                 .HasMaxLength(20)
                 .HasConversion<string>()

@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\BooksAndMore.Catalogue.Domain.Model\BooksAndMore.Catalogue.Domain.Model.csproj" />
     <ProjectReference Include="..\BooksAndMore.Catalogue.Infrastructure.Data\BooksAndMore.Catalogue.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\BooksAndMore.Catalogue.Infrastructure.Migrations\BooksAndMore.Catalogue.Infrastructure.Migrations.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,7 +9,7 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books
         public virtual Book Book { get; private set; }
         public virtual Author Author { get; private set; }
 
-        private BookAuthor() { }
+        protected BookAuthor() { }
 
         public BookAuthor(int bookId, int authorId)
         {

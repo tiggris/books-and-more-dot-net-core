@@ -14,6 +14,12 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
+        public DbQuery<RatedBook> RatedBooks { get; set; }
+
+        public int ReviewsCount(int bookId)
+        {
+            throw new Exception();
+        }
 
         public BooksCatalogueContext(DbContextOptions options) :
             base(options)
@@ -45,7 +51,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
             modelBuilder.Owned<Address>();
 
             // DB function
-            modelBuilder.HasDbFunction(() => UserDefinedFunctions.ReviewsCount(default(int)))
+            modelBuilder.HasDbFunction(() => ReviewsCount(default(int)))
                 .HasName("ReviewsCount")
                 .HasSchema("catalogue");
 

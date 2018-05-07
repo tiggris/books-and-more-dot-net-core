@@ -9,7 +9,7 @@ namespace BooksAndMore.Catalogue.Domain.Model.Books
         public virtual IllustratedBook Book { get; private set; }
         public virtual Illustrator Illustrator { get; private set; }
 
-        private BookIllustrator() { }
+        protected BookIllustrator() { }
 
         public BookIllustrator(int bookId, int illustratorId)
         {

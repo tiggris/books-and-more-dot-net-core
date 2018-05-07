@@ -29,7 +29,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
             // Arrange
             var author = new Author("Harlan", "Coben");
             var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628032", "Niez³y thriller", publisher, new List<Author> { author });
+            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
 
             // Act
             _context.Add(book);
@@ -49,7 +49,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
             const string newTitle = "Nie mów nikomu!";
             var author = new Author("Harlan", "Coben");
             var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628032", "Niez³y thriller", publisher, new List<Author> { author });
+            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
             _context.Add(book);
             _context.SaveChanges();
             ReloadContext();
@@ -73,7 +73,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
             const string newTitle = "Nie mów nikomu!";
             var author = new Author("Harlan", "Coben");
             var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628032", "Niez³y thriller", publisher, new List<Author> { author });
+            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
             _context.Add(book);
             _context.SaveChanges();
             ReloadContext();
@@ -91,12 +91,36 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
         }
 
         [TestMethod]
+        public void UpdateModifiedBookTest()
+        {
+            // Arrange
+            const string newTitle = "Nie mów nikomu!";
+            var author = new Author("Harlan", "Coben");
+            var publisher = new Publisher("Wydawnictwo Znak");
+            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
+            _context.Add(book);
+            _context.SaveChanges();
+            ReloadContext();
+
+            // Act
+            book.Update(newTitle, book.Isbn, book.Description);
+            _context.Books.Update(book);
+            _context.SaveChanges();
+            ReloadContext();
+
+            // Assert
+            var result = _context.Books.Find(book.Id);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(newTitle, result.Title);
+        }
+
+        [TestMethod]
         public void DeleteBookTest()
         {
             // Arrange
             var author = new Author("Harlan", "Coben");
             var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628032", "Niez³y thriller", publisher, new List<Author> { author });
+            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
             _context.Add(book);
             _context.SaveChanges();
             ReloadContext();
@@ -117,7 +141,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
             // Arrange
             var author = new Author("Harlan", "Coben");
             var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628032", "Niez³y thriller", publisher, new List<Author> { author });
+            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
             _context.Add(book);
             _context.SaveChanges();
             ReloadContext();
@@ -139,7 +163,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
             // Arrange
             var author = new Author("Harlan", "Coben");
             var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628032", "Niez³y thriller", publisher, new List<Author> { author });
+            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
             book.AddReview(3, "Jakiœ goœæ", "Œrednia ksi¹¿ka");
             book.AddReview(5, "Coben lover", "Œwietna powieœæ!");
             book.AddReview(1, "Krytyk literatury", "Mog³o byæ lepiej");
@@ -165,7 +189,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
             // Arrange
             var author = new Author("Harlan", "Coben");
             var publisher = new Publisher("Wydawnictwo Znak");
-            var book = new Book("Nie mów nikomu", "9785170628032", "Niez³y thriller", publisher, new List<Author> { author });
+            var book = new Book("Nie mów nikomu", "9785170628031", "Niez³y thriller", publisher, new List<Author> { author });
             _context.Add(book);
             _context.SaveChanges();
             ReloadContext();

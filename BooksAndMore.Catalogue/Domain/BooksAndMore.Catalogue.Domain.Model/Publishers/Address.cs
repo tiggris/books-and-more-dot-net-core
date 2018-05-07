@@ -11,7 +11,7 @@ namespace BooksAndMore.Catalogue.Domain.Model.Publishers
         public string ZipCode { get; private set; }
         public string Country { get; private set; }
 
-        private Address() { }
+        protected Address() { }
 
         internal Address(string street, string building, string apartment, string city, string zipCode, string country)
         {
