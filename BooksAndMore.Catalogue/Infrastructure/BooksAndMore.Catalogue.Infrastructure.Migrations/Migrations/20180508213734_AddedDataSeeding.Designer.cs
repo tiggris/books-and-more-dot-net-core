@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations.Migrations
 {
     [DbContext(typeof(BooksCatalogueContext))]
-    [Migration("20180507213018_AddedDataSeeding")]
+    [Migration("20180508213734_AddedDataSeeding")]
     partial class AddedDataSeeding
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,7 +69,6 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations.Migrations
             modelBuilder.Entity("BooksAndMore.Catalogue.Domain.Model.Books.Book", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:HiLoSequenceName", "BooksHiLoSequence")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
@@ -100,11 +99,13 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations.Migrations
                     b.Property<string>("State")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("State")
                         .HasMaxLength(20)
                         .HasDefaultValue("Active");
 
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasColumnName("Title")
                         .HasMaxLength(100);
 
                     b.HasKey("Id");
@@ -121,18 +122,18 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations.Migrations
                     b.HasDiscriminator<bool>("IsIllustrated").HasValue(false);
 
                     b.HasData(
-                        new { Id = 1, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 789, DateTimeKind.Utc), Isbn = "9788388736919", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 789, DateTimeKind.Utc), PublisherId = 1, State = "Active", Title = "Pan Tadeusz" },
-                        new { Id = 2, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), Isbn = "9788373899285", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), PublisherId = 1, State = "Active", Title = "Dziady" },
-                        new { Id = 3, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), Isbn = "9781500143640", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), PublisherId = 2, State = "Active", Title = "Sonety Krymskie" },
-                        new { Id = 4, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), Isbn = "9781498181334", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), PublisherId = 3, State = "Active", Title = "Konrad Wallenrod" },
-                        new { Id = 5, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), Isbn = "9788377916605", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), PublisherId = 2, State = "Active", Title = "Balladyna" },
-                        new { Id = 6, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), Isbn = "9780313208287", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), PublisherId = 1, State = "Active", Title = "Anhelli" },
-                        new { Id = 7, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), Isbn = "9876543210112", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), PublisherId = 3, State = "Active", Title = "Książka, której nigdy nie było" },
-                        new { Id = 8, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), Isbn = "9788496509290", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), PublisherId = 2, State = "Deleted", Title = "Makbet" },
-                        new { Id = 9, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), Isbn = "9781348101864", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), PublisherId = 2, State = "Active", Title = "Hamlet" },
-                        new { Id = 10, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), Isbn = "9781387317844", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), PublisherId = 1, State = "Active", Title = "Romeo i Julia" },
-                        new { Id = 11, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), Isbn = "9789510422311", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), PublisherId = 1, State = "Active", Title = "Ryszard III" },
-                        new { Id = 12, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), Isbn = "9781480297890", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 790, DateTimeKind.Utc), PublisherId = 3, State = "Active", Title = "Wiele hałasu o nic" }
+                        new { Id = 1, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Isbn = "9788388736919", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 1, State = "Active", Title = "Pan Tadeusz" },
+                        new { Id = 2, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Isbn = "9788373899285", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 1, State = "Active", Title = "Dziady" },
+                        new { Id = 3, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Isbn = "9781500143640", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 2, State = "Active", Title = "Sonety Krymskie" },
+                        new { Id = 4, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Isbn = "9781498181334", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 3, State = "Active", Title = "Konrad Wallenrod" },
+                        new { Id = 5, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Isbn = "9788377916605", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 2, State = "Active", Title = "Balladyna" },
+                        new { Id = 6, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Isbn = "9780313208287", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 1, State = "Active", Title = "Anhelli" },
+                        new { Id = 7, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Isbn = "9876543210112", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 3, State = "Active", Title = "Książka, której nigdy nie było" },
+                        new { Id = 8, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Isbn = "9788496509290", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 2, State = "Deleted", Title = "Makbet" },
+                        new { Id = 9, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Isbn = "9781348101864", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 2, State = "Active", Title = "Hamlet" },
+                        new { Id = 10, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Isbn = "9781387317844", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 1, State = "Active", Title = "Romeo i Julia" },
+                        new { Id = 11, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Isbn = "9789510422311", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 1, State = "Active", Title = "Ryszard III" },
+                        new { Id = 12, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Isbn = "9781480297890", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 3, State = "Active", Title = "Wiele hałasu o nic" }
                     );
                 });
 
@@ -185,6 +186,52 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations.Migrations
                     );
                 });
 
+            modelBuilder.Entity("BooksAndMore.Catalogue.Domain.Model.Books.BookInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "BooksHiLoSequence")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
+
+                    b.Property<string>("Isbn")
+                        .IsRequired()
+                        .HasColumnName("ISBN")
+                        .HasMaxLength(13);
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("State")
+                        .HasMaxLength(20)
+                        .HasDefaultValue("Active");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnName("Title")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Books","catalogue");
+
+                    b.HasData(
+                        new { Id = 1, Isbn = "9788388736919", State = "Active", Title = "Pan Tadeusz" },
+                        new { Id = 2, Isbn = "9788373899285", State = "Active", Title = "Dziady" },
+                        new { Id = 3, Isbn = "9781500143640", State = "Active", Title = "Sonety Krymskie" },
+                        new { Id = 4, Isbn = "9781498181334", State = "Active", Title = "Konrad Wallenrod" },
+                        new { Id = 5, Isbn = "9788377916605", State = "Active", Title = "Balladyna" },
+                        new { Id = 6, Isbn = "9780313208287", State = "Active", Title = "Anhelli" },
+                        new { Id = 7, Isbn = "9876543210112", State = "Active", Title = "Książka, której nigdy nie było" },
+                        new { Id = 8, Isbn = "9788496509290", State = "Deleted", Title = "Makbet" },
+                        new { Id = 9, Isbn = "9781348101864", State = "Active", Title = "Hamlet" },
+                        new { Id = 10, Isbn = "9781387317844", State = "Active", Title = "Romeo i Julia" },
+                        new { Id = 11, Isbn = "9789510422311", State = "Active", Title = "Ryszard III" },
+                        new { Id = 12, Isbn = "9781480297890", State = "Active", Title = "Wiele hałasu o nic" },
+                        new { Id = 13, Isbn = "9788995317471", State = "Active", Title = "Mały Książę" },
+                        new { Id = 14, Isbn = "9782230001040", State = "Active", Title = "Kubuś Puchatek" }
+                    );
+                });
+
             modelBuilder.Entity("BooksAndMore.Catalogue.Domain.Model.Books.Reviews.Review", b =>
                 {
                     b.Property<int>("Id")
@@ -211,38 +258,38 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations.Migrations
                     b.ToTable("Reviews","catalogue");
 
                     b.HasData(
-                        new { Id = 1, BookId = 1, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 824, DateTimeKind.Local), Rating = 3 },
-                        new { Id = 2, BookId = 1, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 3 },
-                        new { Id = 3, BookId = 1, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 5 },
-                        new { Id = 4, BookId = 1, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 5 },
-                        new { Id = 5, BookId = 2, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 2 },
-                        new { Id = 6, BookId = 2, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 3 },
-                        new { Id = 7, BookId = 3, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 1 },
-                        new { Id = 8, BookId = 4, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 3 },
-                        new { Id = 9, BookId = 4, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 4 },
-                        new { Id = 10, BookId = 5, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 1 },
-                        new { Id = 11, BookId = 5, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 2 },
-                        new { Id = 12, BookId = 5, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 2 },
-                        new { Id = 13, BookId = 5, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 3 },
-                        new { Id = 14, BookId = 5, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 4 },
-                        new { Id = 15, BookId = 5, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 3 },
-                        new { Id = 16, BookId = 5, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 4 },
-                        new { Id = 17, BookId = 5, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 5 },
-                        new { Id = 18, BookId = 6, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 1 },
-                        new { Id = 19, BookId = 6, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 2 },
-                        new { Id = 20, BookId = 6, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 3 },
-                        new { Id = 21, BookId = 6, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 5 },
-                        new { Id = 22, BookId = 7, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 3 },
-                        new { Id = 23, BookId = 7, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 1 },
-                        new { Id = 24, BookId = 7, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 4 },
-                        new { Id = 25, BookId = 8, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 3 },
-                        new { Id = 26, BookId = 9, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 4 },
-                        new { Id = 27, BookId = 10, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 2 },
-                        new { Id = 28, BookId = 10, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 2 },
-                        new { Id = 29, BookId = 10, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 1 },
-                        new { Id = 30, BookId = 10, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 5 },
-                        new { Id = 31, BookId = 11, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 5 },
-                        new { Id = 32, BookId = 11, CreateDate = new DateTime(2018, 5, 7, 23, 30, 17, 826, DateTimeKind.Local), Rating = 5 }
+                        new { Id = 1, BookId = 1, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 3 },
+                        new { Id = 2, BookId = 1, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 3 },
+                        new { Id = 3, BookId = 1, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 5 },
+                        new { Id = 4, BookId = 1, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 5 },
+                        new { Id = 5, BookId = 2, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 2 },
+                        new { Id = 6, BookId = 2, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 3 },
+                        new { Id = 7, BookId = 3, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 1 },
+                        new { Id = 8, BookId = 4, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 3 },
+                        new { Id = 9, BookId = 4, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 4 },
+                        new { Id = 10, BookId = 5, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 1 },
+                        new { Id = 11, BookId = 5, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 2 },
+                        new { Id = 12, BookId = 5, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 2 },
+                        new { Id = 13, BookId = 5, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 3 },
+                        new { Id = 14, BookId = 5, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 4 },
+                        new { Id = 15, BookId = 5, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 3 },
+                        new { Id = 16, BookId = 5, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 4 },
+                        new { Id = 17, BookId = 5, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 5 },
+                        new { Id = 18, BookId = 6, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 1 },
+                        new { Id = 19, BookId = 6, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 2 },
+                        new { Id = 20, BookId = 6, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 3 },
+                        new { Id = 21, BookId = 6, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 5 },
+                        new { Id = 22, BookId = 7, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 3 },
+                        new { Id = 23, BookId = 7, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 1 },
+                        new { Id = 24, BookId = 7, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 4 },
+                        new { Id = 25, BookId = 8, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 3 },
+                        new { Id = 26, BookId = 9, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 4 },
+                        new { Id = 27, BookId = 10, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 2 },
+                        new { Id = 28, BookId = 10, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 2 },
+                        new { Id = 29, BookId = 10, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 1 },
+                        new { Id = 30, BookId = 10, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 5 },
+                        new { Id = 31, BookId = 11, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 5 },
+                        new { Id = 32, BookId = 11, CreateDate = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), Rating = 5 }
                     );
                 });
 
@@ -292,13 +339,18 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Migrations.Migrations
                     b.HasDiscriminator().HasValue(true);
 
                     b.HasData(
-                        new { Id = 13, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 792, DateTimeKind.Utc), IsIllustrated = true, Isbn = "9788995317471", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 792, DateTimeKind.Utc), PublisherId = 3, State = "Active", Title = "Mały Książę" },
-                        new { Id = 14, CreateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 792, DateTimeKind.Utc), IsIllustrated = true, Isbn = "9782230001040", LastUpdateDateTime = new DateTime(2018, 5, 7, 21, 30, 17, 792, DateTimeKind.Utc), PublisherId = 1, State = "Active", Title = "Kubuś Puchatek" }
+                        new { Id = 13, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), IsIllustrated = true, Isbn = "9788995317471", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 3, State = "Active", Title = "Mały Książę" },
+                        new { Id = 14, CreateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), IsIllustrated = true, Isbn = "9782230001040", LastUpdateDateTime = new DateTime(2018, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), PublisherId = 1, State = "Active", Title = "Kubuś Puchatek" }
                     );
                 });
 
             modelBuilder.Entity("BooksAndMore.Catalogue.Domain.Model.Books.Book", b =>
                 {
+                    b.HasOne("BooksAndMore.Catalogue.Domain.Model.Books.BookInfo")
+                        .WithOne()
+                        .HasForeignKey("BooksAndMore.Catalogue.Domain.Model.Books.Book", "Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("BooksAndMore.Catalogue.Domain.Model.Publishers.Publisher", "Publisher")
                         .WithMany()
                         .HasForeignKey("PublisherId")

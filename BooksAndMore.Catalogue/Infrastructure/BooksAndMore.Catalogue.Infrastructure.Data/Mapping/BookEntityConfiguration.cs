@@ -3,6 +3,7 @@ using BooksAndMore.Catalogue.Domain.Model.Books;
 using BooksAndMore.Catalogue.Infrastructure.Data.Mapping.ValueGenerators;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
 {
@@ -65,19 +66,20 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
                 .ValueGeneratedOnUpdate();
 
             // Data seeding
+            var date = new DateTime(2018, 5, 1);
             builder.HasData(
-                new { Id = 1, Title = "Pan Tadeusz", Isbn = "9788388736919", PublisherId = 1, State = State.Active, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime },
-                new { Id = 2, Title = "Dziady", Isbn = "9788373899285", PublisherId = 1, State = State.Active, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime },
-                new { Id = 3, Title = "Sonety Krymskie", Isbn = "9781500143640", PublisherId = 2, State = State.Active, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime },
-                new { Id = 4, Title = "Konrad Wallenrod", Isbn = "9781498181334", PublisherId = 3, State = State.Active, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime },
-                new { Id = 5, Title = "Balladyna", Isbn = "9788377916605", PublisherId = 2, State = State.Active, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime },
-                new { Id = 6, Title = "Anhelli", Isbn = "9780313208287", PublisherId = 1, State = State.Active, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime },
-                new { Id = 7, Title = "Książka, której nigdy nie było", Isbn = "9876543210112", PublisherId = 3, State = State.Active, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime },
-                new { Id = 8, Title = "Makbet", Isbn = "9788496509290", PublisherId = 2, State = State.Deleted, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime },
-                new { Id = 9, Title = "Hamlet", Isbn = "9781348101864", PublisherId = 2, State = State.Active, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime },
-                new { Id = 10, Title = "Romeo i Julia", Isbn = "9781387317844", PublisherId = 1, State = State.Active, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime },
-                new { Id = 11, Title = "Ryszard III", Isbn = "9789510422311", PublisherId = 1, State = State.Active, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime },
-                new { Id = 12, Title = "Wiele hałasu o nic", Isbn = "9781480297890", PublisherId = 3, State = State.Active, CreateDateTime = DateTimeProvider.CurrentDateTime, LastUpdateDateTime = DateTimeProvider.CurrentDateTime });
+                new { Id = 1, Title = "Pan Tadeusz", Isbn = "9788388736919", PublisherId = 1, State = State.Active, CreateDateTime = date, LastUpdateDateTime = date },
+                new { Id = 2, Title = "Dziady", Isbn = "9788373899285", PublisherId = 1, State = State.Active, CreateDateTime = date, LastUpdateDateTime = date },
+                new { Id = 3, Title = "Sonety Krymskie", Isbn = "9781500143640", PublisherId = 2, State = State.Active, CreateDateTime = date, LastUpdateDateTime = date },
+                new { Id = 4, Title = "Konrad Wallenrod", Isbn = "9781498181334", PublisherId = 3, State = State.Active, CreateDateTime = date, LastUpdateDateTime = date },
+                new { Id = 5, Title = "Balladyna", Isbn = "9788377916605", PublisherId = 2, State = State.Active, CreateDateTime = date, LastUpdateDateTime = date },
+                new { Id = 6, Title = "Anhelli", Isbn = "9780313208287", PublisherId = 1, State = State.Active, CreateDateTime = date, LastUpdateDateTime = date },
+                new { Id = 7, Title = "Książka, której nigdy nie było", Isbn = "9876543210112", PublisherId = 3, State = State.Active, CreateDateTime = date, LastUpdateDateTime = date },
+                new { Id = 8, Title = "Makbet", Isbn = "9788496509290", PublisherId = 2, State = State.Deleted, CreateDateTime = date, LastUpdateDateTime = date },
+                new { Id = 9, Title = "Hamlet", Isbn = "9781348101864", PublisherId = 2, State = State.Active, CreateDateTime = date, LastUpdateDateTime = date },
+                new { Id = 10, Title = "Romeo i Julia", Isbn = "9781387317844", PublisherId = 1, State = State.Active, CreateDateTime = date, LastUpdateDateTime = date },
+                new { Id = 11, Title = "Ryszard III", Isbn = "9789510422311", PublisherId = 1, State = State.Active, CreateDateTime = date, LastUpdateDateTime = date },
+                new { Id = 12, Title = "Wiele hałasu o nic", Isbn = "9781480297890", PublisherId = 3, State = State.Active, CreateDateTime = date, LastUpdateDateTime = date });
         }
     }
 }
