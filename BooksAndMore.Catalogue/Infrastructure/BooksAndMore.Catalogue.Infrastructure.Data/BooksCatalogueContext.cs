@@ -5,6 +5,7 @@ using BooksAndMore.Catalogue.Domain.Model.Publishers;
 using BooksAndMore.Catalogue.Infrastructure.Data.Mapping;
 using BooksAndMore.Catalogue.Infrastructure.Data.Mapping.ValueGenerators;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 
 namespace BooksAndMore.Catalogue.Infrastructure.Data
@@ -30,6 +31,9 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();
+            optionsBuilder.ConfigureWarnings(config => 
+                config.Log( CoreEventId.DetachedLazyLoadingWarning,
+                            CoreEventId.LazyLoadOnDisposedContextWarning));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
