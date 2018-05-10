@@ -1,0 +1,6 @@
+DELETE FROM [catalogue].[BookAuthors]
+DELETE FROM [catalogue].[BookIllustrators]
+DELETE FROM [catalogue].[Reviews]
+DELETE FROM [catalogue].[Books]
+DELETE FROM [catalogue].[Publishers]
+DELETE FROM [catalogue].[Authors]
