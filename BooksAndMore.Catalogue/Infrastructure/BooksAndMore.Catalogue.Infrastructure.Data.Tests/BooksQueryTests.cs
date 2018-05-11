@@ -363,5 +363,23 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
                 Assert.IsNull(result.Last().AverageRating);
             }
         }
+
+        [TestMethod]
+        public void BookQuery_Should_ReturnOnlyIllustratedBooks_When_FilterByIsIllustrated()
+        {
+            using (var context = CreateNewContext())
+            {
+                // Act
+                var result = context.Books
+                    .Where(book => book.IsIllustrated)
+                    .ToList();
+
+                // Assert
+                Assert.IsNotNull(result);
+                Assert.AreEqual(2, result.Count);
+                Assert.AreEqual("Mały Książę", result.First().Title);
+                Assert.AreEqual("Kubuś Puchatek", result.Last().Title);
+            }
+        }
     }
 }
