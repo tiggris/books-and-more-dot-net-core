@@ -12,9 +12,9 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
     public class BooksQueryTests : TestBase
     {
         [TestMethod]
-        public void BooksQuery_Should_ReturnBooks_When_QueryByAuthor()
+        public void BooksQuery_Should_ReturnBooksWithAuthors_When_QueryByAuthor_And_LazyLoadingEnabled()
         {
-            using (var context = CreateNewContext())
+            using (var context = CreateNewContext(enableLazyLoading: true))
             {
                 // Arrange
                 const string author = "Mickiewicz";
@@ -34,7 +34,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
         [TestMethod]
         public void BooksQuery_Should_ReturnBooksWithRelatedEntities_When_LazyLoadingEnabled()
         {
-            using (var context = CreateNewContext())
+            using (var context = CreateNewContext(enableLazyLoading: true))
             {
                 // Act
                 var result = context.Books.ToList();

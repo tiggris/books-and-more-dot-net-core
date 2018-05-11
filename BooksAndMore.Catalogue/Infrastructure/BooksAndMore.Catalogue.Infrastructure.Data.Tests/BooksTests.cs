@@ -210,7 +210,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
             }
 
             // Assert
-            using (var context = CreateNewContext())
+            using (var context = CreateNewContext(enableLazyLoading: true))
             {
                 var result = FindBook(context);
                 Assert.IsNotNull(result);
@@ -245,7 +245,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
             }
 
             // Assert
-            using (var context = CreateNewContext())
+            using (var context = CreateNewContext(enableLazyLoading: true))
             {
                 var result = FindBook(context);
                 Assert.IsNotNull(result);

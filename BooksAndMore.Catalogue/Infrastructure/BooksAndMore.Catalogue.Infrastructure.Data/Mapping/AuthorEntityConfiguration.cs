@@ -15,7 +15,11 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Mapping
             builder.HasDiscriminator(author => author.AuthorType)
                 .HasValue<Author>(AuthorType.Author)
                 .HasValue<Illustrator>(AuthorType.Illustrator);
-            
+
+            builder.HasOne(author => author.AuthorDetail)
+                .WithOne(authorDetail => authorDetail.Author)
+                .HasForeignKey<AuthorDetail>(authorDetail => authorDetail.Id);
+
             builder.Property(author => author.FirstName)
                 .IsRequired()
                 .HasMaxLength(30);

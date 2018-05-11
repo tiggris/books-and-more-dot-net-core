@@ -11,6 +11,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
         private static readonly string _connectionString;
         private const string _migrationsAssemblyName = "BooksAndMore.Catalogue.Infrastructure.Data.Migrations";
         protected static DbContextOptionsBuilder<BooksCatalogueContext> _optionsBuilder;
+        protected static DbContextOptionsBuilder<BooksCatalogueContext> _optionsBuilderWithLazyLoading;
 
         static TestBase()
         {
@@ -21,6 +22,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
         public static void AssemblyInitialize(TestContext testContext)
         {            
             _optionsBuilder = GetOptionsBuilder();
+            _optionsBuilderWithLazyLoading = GetOptionsBuilder(true);
             using (var context = CreateNewContext())
             {
                 context.Database.Migrate();
@@ -36,7 +38,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
             }
         }
 
-        private static DbContextOptionsBuilder<BooksCatalogueContext> GetOptionsBuilder()
+        private static DbContextOptionsBuilder<BooksCatalogueContext> GetOptionsBuilder(bool enableLazyLoading = false)
         {
             var serviceProvider = new ServiceCollection()
                 .AddEntityFrameworkSqlServer()
@@ -45,17 +47,23 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
 
             var optionsBuilder = new DbContextOptionsBuilder<BooksCatalogueContext>();
             optionsBuilder
-                .UseLazyLoadingProxies()
                 .UseSqlServer(_connectionString, 
                     sqlServerOptions => sqlServerOptions.MigrationsAssembly(_migrationsAssemblyName))
                 .UseInternalServiceProvider(serviceProvider);
 
+            if(enableLazyLoading)
+            {
+                optionsBuilder.UseLazyLoadingProxies();
+            }
+
             return optionsBuilder;
         }
 
-        protected static BooksCatalogueContext CreateNewContext()
+        protected static BooksCatalogueContext CreateNewContext(bool enableLazyLoading = false)
         {
-            return new BooksCatalogueContext(_optionsBuilder.Options);
+            return enableLazyLoading ? 
+                new BooksCatalogueContext(_optionsBuilderWithLazyLoading.Options) :
+                new BooksCatalogueContext(_optionsBuilder.Options);
         }
     }
 }

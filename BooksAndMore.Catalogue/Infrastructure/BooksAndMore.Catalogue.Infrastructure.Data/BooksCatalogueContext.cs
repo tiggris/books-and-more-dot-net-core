@@ -14,6 +14,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<AuthorDetail> AuthorDetails { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbQuery<RatedBook> RatedBooks { get; set; }
 
@@ -71,6 +72,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new BookEntityConfiguration());
             modelBuilder.ApplyConfiguration(new IllustratedBookEntityConfiguration());
             modelBuilder.ApplyConfiguration(new AuthorEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new AuthorDetailEntityConfiguration());
             modelBuilder.ApplyConfiguration(new IllustratorEntityConfiguration());
             modelBuilder.ApplyConfiguration(new BookAuthorEntityConfiguration());
             modelBuilder.ApplyConfiguration(new BookIllustratorEntityConfiguration());
