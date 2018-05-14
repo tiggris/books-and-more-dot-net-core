@@ -1,41 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BooksAndMore.Catalogue.Domain.Model.Books;
+using BooksAndMore.Catalogue.Infrastructure.Data;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BooksAndMore.Catalogue.Web.Api.Controllers
 {
     [Route("api/books")]
     public class BooksController : Controller
     {
-        // GET api/values
+        private readonly BooksCatalogueContext _context;
+
+        public BooksController(BooksCatalogueContext context)
+        {
+            _context = context;
+        }
+
+        // GET api/books
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Book> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _context.Books.ToList();
         }
 
-        // GET api/values/5
+        // GET api/books/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Book Get(int id)
         {
-            return "value";
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return _context.Books.Find(id);
         }
     }
 }
