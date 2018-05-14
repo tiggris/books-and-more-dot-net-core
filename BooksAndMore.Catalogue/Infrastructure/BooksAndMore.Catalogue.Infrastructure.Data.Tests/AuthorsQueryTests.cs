@@ -86,5 +86,30 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
                 Assert.AreEqual(new DateTime(1798, 12, 24), result.BirthDate);
             }
         }
+
+        [TestMethod]
+        public void AuthorQuery_Should_ReturnAuthorsWithNumberOfBooks_When_GroupByAuthor()
+        {
+            using (var context = CreateNewContext())
+            {
+                // Act
+                var result = context.Authors
+                    .SelectMany(author => author.BookAuthors)
+                    .GroupBy(bookAuthor => bookAuthor.Author)
+                    .Select(bookAuthor => new
+                    {
+                        Author = bookAuthor.Key,
+                        BooksCount = bookAuthor.Count()
+                    })
+                    .OrderByDescending(bookAuthor => bookAuthor.BooksCount)
+                    .ToList();
+
+                // Assert
+                Assert.IsNotNull(result);
+                Assert.AreEqual(5, result.Count);
+                Assert.AreEqual("Adam Mickiewicz", result.First().Author.FullName);
+                Assert.AreEqual(5, result.First().BooksCount);
+            }
+        }
     }
 }

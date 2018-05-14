@@ -7,8 +7,12 @@ namespace BooksAndMore.Catalogue.Domain.Model.Publishers
         public int Id { get; private set; }
         public string Name { get; private set; }
         public virtual Address Address { get; private set; }
-
-        protected Publisher() { }
+        
+        protected Publisher(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
 
         public Publisher(string name, string street = null, string building = null, string apartment = null, string city = null, string zipCode = null, string country = null)
         {

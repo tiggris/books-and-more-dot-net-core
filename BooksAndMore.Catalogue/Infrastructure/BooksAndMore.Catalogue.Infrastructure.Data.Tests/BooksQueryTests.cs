@@ -80,7 +80,7 @@ namespace BooksAndMore.Catalogue.Infrastructure.Data.Tests
             {
                 Assert.IsNotNull(book);
                 Assert.IsNotNull(book.Publisher);
-                Assert.IsNotNull(book.Reviews.Any());
+                Assert.IsNotNull(book.Reviews);
                 Assert.IsNotNull(book.BookAuthors);
                 foreach (var bookAuthor in book.BookAuthors)
                 {
