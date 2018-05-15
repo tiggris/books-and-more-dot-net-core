@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BooksAndMore.Catalogue.Domain.Model.Authors.Author" Collapsed="true">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAABAAIAACAAAACAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Authors\Author.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BooksAndMore.Catalogue.Domain.Model.Authors.Illustrator" Collapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Authors\Illustrator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooksAndMore.Catalogue.Domain.Model.Publishers.Publisher" Collapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAAAAAAAAAAAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Publishers\Publisher.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Address" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BooksAndMore.Catalogue.Domain.Model.Publishers.Address" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAIAAAAAAAAAAIAAAABAAIAQAAAAAA=</HashCode>
+      <FileName>Publishers\Address.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooksAndMore.Catalogue.Domain.Model.Books.Book" Collapsed="true">
+    <Position X="3" Y="2.5" Width="1.5" />
+    <AssociationLine Name="Reviews" Type="System.Collections.ObjectModel.ObservableCollection(Of T)" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.438" Y="2.5" />
+        <Point X="4.881" Y="2.5" />
+        <Point X="4.881" Y="1.096" />
+        <Point X="5.5" Y="1.096" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQCEEAAAABgAUAACAQAAAAAAQEAAAAAACAABAAAAAA=</HashCode>
+      <FileName>Books\Book.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Publisher" />
+      <Property Name="Reviews" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BooksAndMore.Catalogue.Domain.Model.Books.IllustratedBook" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Books\IllustratedBook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooksAndMore.Catalogue.Domain.Model.Books.BookAuthor" Collapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAABAgAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Books\BookAuthor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Author" />
+      <Property Name="Book" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BooksAndMore.Catalogue.Domain.Model.Books.BookIllustrator" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAABAAAAIAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Books\BookIllustrator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Book" />
+      <Property Name="Illustrator" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="System.Collections.ObjectModel.ObservableCollection(Of T)" Collapsed="true">
+    <Position X="5.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

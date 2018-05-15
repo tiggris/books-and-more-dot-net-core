@@ -1,4 +1,6 @@
-﻿using BooksAndMore.Catalogue.Domain.Common.Data;
+﻿using BooksAndMore.Catalogue.Application.Queries.BooksSearchQuery;
+using BooksAndMore.Catalogue.Application.Queries.TopBooksQuery;
+using BooksAndMore.Catalogue.Domain.Common.Data;
 using BooksAndMore.Catalogue.Infrastructure.Data;
 using BooksAndMore.Catalogue.Infrastructure.Data.Repositories;
 using BooksAndMore.Catalogue.Web.Api.Infrastructure.Data;
@@ -34,6 +36,8 @@ namespace BooksAndMore.Catalogue.Web.Api
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IQueryProvider, QueryProvider>();
+            services.AddScoped<ITopBooksQuery, TopBooksQuery>();
+            services.AddScoped<IBooksSearchQuery, BooksSearchQuery>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,7 +46,7 @@ namespace BooksAndMore.Catalogue.Web.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                
+
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     var booksCatalogueContext = serviceScope.ServiceProvider.GetService<BooksCatalogueContext>();

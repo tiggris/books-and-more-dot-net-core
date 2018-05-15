@@ -31,4 +31,10 @@
     <ProjectReference Include="..\..\Infrastructure\BooksAndMore.Catalogue.Infrastructure.Migrations\BooksAndMore.Catalogue.Infrastructure.Migrations.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
