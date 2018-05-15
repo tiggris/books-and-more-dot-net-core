@@ -1,9 +1,9 @@
-﻿using BooksAndMore.Catalogue.Application.Queries.BooksSearchQuery;
+﻿using BooksAndMore.Catalogue.Application.Queries.BooksQuery;
+using BooksAndMore.Catalogue.Application.Queries.BooksSearchQuery;
 using BooksAndMore.Catalogue.Application.Queries.TopBooksQuery;
 using BooksAndMore.Catalogue.Domain.Common.Data;
 using BooksAndMore.Catalogue.Infrastructure.Data;
 using BooksAndMore.Catalogue.Infrastructure.Data.Repositories;
-using BooksAndMore.Catalogue.Web.Api.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,10 +27,12 @@ namespace BooksAndMore.Catalogue.Web.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddEntityFrameworkProxies();
             services.AddDbContext<BooksCatalogueContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString(_connectionStringName),
-                    sqlServerOptions => sqlServerOptions.MigrationsAssembly(_migrationsAssemblyName)));
+                options
+                .UseSqlServer(Configuration.GetConnectionString(_connectionStringName),
+                    sqlServerOptions => sqlServerOptions.MigrationsAssembly(_migrationsAssemblyName))
+                .UseLazyLoadingProxies());
 
             services.AddMvc();
 
@@ -38,6 +40,7 @@ namespace BooksAndMore.Catalogue.Web.Api
             services.AddScoped<IQueryProvider, QueryProvider>();
             services.AddScoped<ITopBooksQuery, TopBooksQuery>();
             services.AddScoped<IBooksSearchQuery, BooksSearchQuery>();
+            services.AddScoped<IBooksQuery, BooksQuery>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +54,7 @@ namespace BooksAndMore.Catalogue.Web.Api
                 {
                     var booksCatalogueContext = serviceScope.ServiceProvider.GetService<BooksCatalogueContext>();
                     booksCatalogueContext.Database.Migrate();
-                    booksCatalogueContext.EnsureSeedData();
+                    //booksCatalogueContext.EnsureSeedData();
                 }
             }
 

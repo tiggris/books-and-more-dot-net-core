@@ -13,13 +13,13 @@ namespace BooksAndMore.Catalogue.Application.Queries.BooksSearchQuery
             _queryProvider = queryProvider;
         }
 
-        public IList<BooksListItem> SearchBooks(string searchTerm)
+        public IList<BooksSearchListItem> SearchBooks(string searchTerm)
         {
             return _queryProvider.Query<Book>()
                 .Where(book => 
                     book.Title.Contains(searchTerm) || 
                     book.BookAuthors.Any(bookAuthor => bookAuthor.Author.FullName.Contains(searchTerm)))
-                .Select(book => new BooksListItem {
+                .Select(book => new BooksSearchListItem {
                     Id = book.Id,
                     Isbn = book.Isbn,
                     Title = book.Title,

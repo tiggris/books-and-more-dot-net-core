@@ -1,6 +1,6 @@
 ﻿namespace BooksAndMore.Catalogue.Application.Queries.BooksSearchQuery
 {
-    public class BooksListItem
+    public class BooksSearchListItem
     {
         public int Id { get; set; }
         public string Isbn { get; set; }
